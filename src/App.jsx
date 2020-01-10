@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
-import { TweenMax } from 'gsap';
+import { TimelineMax } from 'gsap';
 
 import Desktop from './components/Desktop/Desktop';
+
+import { LOADING_SCREEN_TIME, LOADING_SCREEN_FADE_DURATION, IS_DEV } from './constants';
 
 import cls from './App.module.scss';
 
 function App() {
-  const isDev = true;
 
   const hideLoadingScreen = () => {
-    TweenMax.set(document.querySelector('#loading'), {delay: isDev ? .2 : 1.5, display: 'none'})
+    const loadingScreen = document.querySelector('#loading');
+    const loadingScreenTimeline = new TimelineMax();
+
+    loadingScreenTimeline
+      .to(loadingScreen, LOADING_SCREEN_FADE_DURATION, {autoAlpha: 0}, `+=${IS_DEV ? .2 : LOADING_SCREEN_TIME}`)
+      .set(loadingScreen, {display: 'none'});
   };
 
   useEffect(hideLoadingScreen)
