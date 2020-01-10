@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { TweenMax } from 'gsap';
 
+import Desktop from './components/Desktop/Desktop';
+
+import cls from './App.module.scss';
+
 function App() {
   const isDev = true;
 
@@ -10,7 +14,9 @@ function App() {
 
   useEffect(hideLoadingScreen)
 
-  return <h1>Andrei Koreh</h1>
+  return <div className={cls.app}>
+    <Desktop />
+  </div>
 }
 
 export default App;
