@@ -6,6 +6,7 @@ import Desktop from './components/Desktop/Desktop';
 import { LOADING_SCREEN_TIME, LOADING_SCREEN_FADE_DURATION, IS_DEV } from './constants';
 
 import cls from './App.module.scss';
+import TopBar from './components/TopBar/TopBar';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
   useEffect(hideLoadingScreen)
 
   return <div className={cls.app}>
+    <TopBar />
     <Desktop />
   </div>
 }

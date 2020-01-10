@@ -1,4 +1,4 @@
-export const IS_DEV = false;
+export const IS_DEV = true;
 
 //Animation stuff
 export const LOADING_SCREEN_TIME =  2.2;

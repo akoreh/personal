@@ -30,7 +30,7 @@ const ParallaxBackground = ({layers}) => {
         scrollToTop();
 
         setTimeout(() => toggleCursorVisibility(true), 
-            (LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION) * 1000
+            IS_DEV ? 0 : (LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION) * 1000
         );
     }, []);
 
