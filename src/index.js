@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/all';
 
+import StoreProvider from './store/StoreProvider';
+
 import * as serviceWorker from './serviceWorker';
 
 import App from './App';
 
 import './index.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<StoreProvider>
+    <App />
+</StoreProvider>, document.getElementById('root'));
 
 gsap.registerPlugin(ScrollToPlugin);
 

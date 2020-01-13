@@ -9,12 +9,18 @@
     background-color: $darkPurple;
     width: 100%;
     z-index: $topBarZIndex;
+    padding: 0 1.5rem;
+
+    .left,
+    .center,
+    .right {
+        display: flex;
+        align-items: center;
+    }
 
     .left {
         flex: 1;
-        display: flex;
         justify-content: center;
-        align-items: center;
 
         .brand {
             font-size: .9rem;
@@ -28,5 +34,11 @@
 
     .right {
         flex: 2;
+
+        .time {
+            font-size: .7rem;
+            font-weight: normal;
+            margin-left: auto;
+        }
     }
 }
