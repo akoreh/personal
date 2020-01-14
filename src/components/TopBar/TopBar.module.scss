@@ -10,6 +10,7 @@
     width: 100%;
     z-index: $topBarZIndex;
     padding: 0 1.5rem;
+    transform: translateY(-100%);
 
     .left,
     .center,
