@@ -1,5 +1,5 @@
 import React, { useEffect, createRef } from 'react';
-import { TweenMax, TimelineLite } from 'gsap';
+import { TweenMax } from 'gsap';
 
 import ParallaxLayer from './ParallaxLayer/ParallaxLayer';
 
@@ -10,28 +10,25 @@ import cls from './ParallaxBackground.module.scss';
 const ParallaxBackground = ({layers}) => {
     const parallaxRef = createRef();
 
-    const toggleCursorVisibility = (isVisible) => TweenMax.set(document.body, {cursor: isVisible ? 'auto' : 'none'});
-
     const scrollToBottom = () => parallaxRef.current.scrollTo(0, parallaxRef.current.clientHeight);
 
     const scrollToTop = () => {
+        const target =  parallaxRef.current;
+
         if (IS_DEV) {
-            TweenMax.to(parallaxRef.current, {scrollTo: {x: 0, y: 0}});
+            TweenMax.set(target, {scrollTo: {x: 0, y: 0}});
         } else {
-            const scrollToTopTimeline = new TimelineLite();
-            scrollToTopTimeline
-                .to(parallaxRef.current, SCROLL_TO_TOP_DURATION, {scrollTo: {x: 0, y: 0}}, `+=${LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION}`);
+            const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION;
+
+            setTimeout(() => {
+                TweenMax.to(target, SCROLL_TO_TOP_DURATION, {scrollTo: {x: 0, y: 0}});
+            }, delay * 1000);
         }
     }
     
     useEffect(() => {
-        toggleCursorVisibility(false);
         scrollToBottom();
         scrollToTop();
-
-        setTimeout(() => toggleCursorVisibility(true), 
-            IS_DEV ? 0 : (LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION) * 1000
-        );
     }, []);
 
     return <div className={cls.parallaxBackground}>
