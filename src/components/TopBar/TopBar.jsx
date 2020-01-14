@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import moment from 'moment';
 
 import { systemTimeContext } from '../../store/SystemTimeProvider';
+import socialIcons from './socialIcons';
 
 import { C } from '../../util';
 
 import cls from './TopBar.module.scss';
+import TopBarSocialIcon from './TopBarSocialIcon/TopBarSocialIcon';
 
 const TopBar = () => {
     const systemTime = useContext(systemTimeContext);
@@ -17,9 +19,12 @@ const TopBar = () => {
         <div className={cls.center}>
         </div>
         <div className={cls.right}>
-            <span className={cls.time}>{moment(systemTime).format('ddd Do MMM HH:mm')}</span>
+            <div className={cls.icons}>
+                {socialIcons.map(icon => <TopBarSocialIcon key={icon.alt} {...icon} />)}
+            </div>
+            <span className={C(cls.time, 'no-select')}>{moment(systemTime).format('ddd Do MMM HH:mm')}</span>
         </div>
-    </nav>
+    </nav>;
 }
 
 export default TopBar;
