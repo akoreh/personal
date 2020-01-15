@@ -11,10 +11,7 @@ import TopBar from './components/TopBar/TopBar';
 function App() {
   const showCursor = () => {
     const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION;
-
-    setTimeout(() => {
-      TweenMax.set(document.body, {cursor: ''});
-    }, IS_DEV ? 0 : delay * 1000);
+    TweenMax.set(document.body, {cursor: '', delay: IS_DEV ? 0 : delay});
 };
 
   const hideLoadingScreen = () => {

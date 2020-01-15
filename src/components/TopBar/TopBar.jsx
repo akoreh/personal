@@ -22,15 +22,11 @@ const TopBar = () => {
         if (IS_DEV) {
             TweenMax.set(target, {y: 0});
         } else {
-            setTimeout(() => {
-                TweenMax.to(target, 1, {y: 0, ease: Expo.easeOut});
-            }, delay * 1000);
+            TweenMax.to(target, 1, {y: 0, ease: Expo.easeOut, delay});
         }
     };
 
-    useEffect(() => {
-       animateTopBar();
-    }, []);
+    useEffect(() => animateTopBar(), []);
 
     return <nav className={cls.topBar} ref={topBarRef}>
         <div className={cls.left}>

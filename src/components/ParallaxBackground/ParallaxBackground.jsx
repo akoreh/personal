@@ -19,10 +19,7 @@ const ParallaxBackground = ({layers}) => {
             TweenMax.set(target, {scrollTo: {x: 0, y: 0}});
         } else {
             const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION;
-
-            setTimeout(() => {
-                TweenMax.to(target, SCROLL_TO_TOP_DURATION, {scrollTo: {x: 0, y: 0}});
-            }, delay * 1000);
+            TweenMax.to(target, SCROLL_TO_TOP_DURATION, {scrollTo: {x: 0, y: 0}, delay});
         }
     }
     
