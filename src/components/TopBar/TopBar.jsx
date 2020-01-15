@@ -3,13 +3,13 @@ import moment from 'moment';
 import { TweenMax, Expo } from 'gsap';
 
 import { systemTimeContext } from '../../store/SystemTimeProvider';
-import socialIcons from './socialIcons';
 import { IS_DEV, LOADING_SCREEN_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
+import socialIcons from './socialIcons';
 
 import { C } from '../../util';
 
 import cls from './TopBar.module.scss';
-import TopBarSocialIcon from './TopBarSocialIcon/TopBarSocialIcon';
+import SocialIcon from '../SocialIcon/SocialIcon';
 
 const TopBar = () => {
     const systemTime = useContext(systemTimeContext);
@@ -36,7 +36,7 @@ const TopBar = () => {
         </div>
         <div className={cls.right}>
             <div className={cls.icons}>
-                {socialIcons.map(icon => <TopBarSocialIcon key={icon.alt} {...icon} />)}
+                {socialIcons.map(icon => <SocialIcon key={icon.alt} {...icon} />)}
             </div>
             <span className={C(cls.time, 'no-select')}>{moment(systemTime).format('ddd Do MMM HH:mm')}</span>
         </div>
