@@ -38,6 +38,7 @@
         flex: 2;
 
         .icons {
+            height: 100%;
             flex: 1;
             justify-content: flex-end;
             padding: 0 1rem;
@@ -51,6 +52,7 @@
             font-size: .7rem;
             font-weight: normal;
             margin-left: auto;
+            transform: translateY(-2px);
         }
     }
 }

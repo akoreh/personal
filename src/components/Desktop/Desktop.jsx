@@ -7,7 +7,7 @@ import backgrounds from './backgrounds';
 import cls from './Desktop.module.scss';
 
 const Desktop = () => (
-    <div className={cls.desktop}>
+    <div className={cls.desktop} style={{paddingTop: '5rem'}}>
         <ParallaxBackground layers={backgrounds[0].layers}/>
     </div>
 );

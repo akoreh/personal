@@ -8,6 +8,7 @@ import { IS_DEV, LOADING_SCREEN_TIME, LOADING_SCREEN_FADE_DURATION, SCROLL_TO_TO
 import cls from './App.module.scss';
 import TopBar from './components/TopBar/TopBar';
 
+
 function App() {
   const showCursor = () => {
     const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION;
