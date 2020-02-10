@@ -1,8 +1,9 @@
-$desktopIconSize: 3.5rem;
+$desktopIconSize: 3rem;
 
 .desktopIcons {
     display: flex;
     flex-direction: column;
+    margin-right: 2rem;
 
     & > :not(:last-child) {
         margin-bottom: 2rem;
