@@ -1,0 +1,19 @@
+$desktopIconSize: 3.5rem;
+
+.desktopIcons {
+    display: flex;
+    flex-direction: column;
+
+    & > :not(:last-child) {
+        margin-bottom: 2rem;
+    }
+}
+
+.folderIcon {
+    width: $desktopIconSize;
+}
+
+.browserIcon {
+    width: $desktopIconSize;
+    margin-bottom: .5rem;
+}

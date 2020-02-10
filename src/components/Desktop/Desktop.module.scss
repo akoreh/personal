@@ -1,6 +1,7 @@
 @import '../../scss/variables';
 
 .desktop {
+    display: flex;
     height: 100%;
     background-color: $orange;
     z-index: $desktopZIndex;

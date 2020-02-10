@@ -14,8 +14,7 @@
 
     .left,
     .center,
-    .right,
-    .icons {
+    .right {
         display: flex;
         align-items: center;
     }
@@ -36,17 +35,6 @@
 
     .right {
         flex: 2;
-
-        .icons {
-            height: 100%;
-            flex: 1;
-            justify-content: flex-end;
-            padding: 0 1rem;
-
-            & >:not(:last-child) {
-                margin-right: .4rem;
-            }
-        }
 
         .time {
             font-size: .7rem;

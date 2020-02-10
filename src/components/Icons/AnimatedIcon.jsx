@@ -1,12 +1,13 @@
 import React, { createRef, useEffect } from 'react';
 import lottie from 'lottie-web';
 
-const AnimatedIcon = ({ 
-    width, 
+const AnimatedIcon = ({
+    key,
     autoplay, 
     speed = 1, 
-    startDelay = 0, 
-    containerStyle, 
+    startDelay = 0,
+    className,
+    style, 
     ...props 
 }) => {
     const base = createRef();
@@ -27,11 +28,14 @@ const AnimatedIcon = ({
         }, startDelay * 1000);
     };
 
-    useEffect(() => {
-        initAnimation();
-    }, []);
+    useEffect(initAnimation, []);
 
-    return <div id={`lottie_${props.name}`} style={containerStyle} ref={base} />
+    return <div 
+        id={`lottie_${key}`} 
+        className={className} 
+        style={style} 
+        ref={base} 
+    />;
 };
 
 export default AnimatedIcon;

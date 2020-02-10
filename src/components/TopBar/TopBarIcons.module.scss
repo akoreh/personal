@@ -1,0 +1,37 @@
+.topBarIcons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 0 1rem;
+
+    & >:not(:last-child) {
+        margin-right: .4rem;
+    }
+}
+
+.wifiIndicator {
+    width: 2.5rem;
+    margin-left: -.6rem;
+    pointer-events: none;
+}
+
+.batteryIndicator {
+    width: 7.5rem;
+    margin-right: -3rem;
+    margin-left: -3.5rem;
+    pointer-events: none;
+}
+
+.emailIcon {
+    height: .9rem;
+}
+
+.gitHubIcon {
+    height: 1rem;
+}
+
+.linkedInIcon {
+    height: 1.2rem;
+}

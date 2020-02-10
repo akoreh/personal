@@ -2,17 +2,13 @@ import React, { useContext, useEffect, createRef } from 'react';
 import moment from 'moment';
 import { TweenMax, Expo } from 'gsap';
 
-import SocialIcon from '../SocialIcon/SocialIcon';
-import AnimatedIcon from '../AnimatedIcon/AnimatedIcon';
-
 import { systemTimeContext } from '../../store/SystemTimeProvider';
 import { IS_DEV, LOADING_SCREEN_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
-import socialIcons from './socialIcons';
-import animatedIcons from './animatedIcons';
 
 import { C } from '../../util';
 
 import cls from './TopBar.module.scss';
+import TopBarIcons from './TopBarIcons';
 
 const TopBar = () => {
     const systemTime = useContext(systemTimeContext);
@@ -29,19 +25,16 @@ const TopBar = () => {
         }
     };
 
-    useEffect(() => animateTopBar(), []);
+    useEffect(animateTopBar, []);
 
     return <nav className={cls.topBar} ref={topBarRef}>
         <div className={cls.left}>
-            <h1 className={C(cls.brand, 'no-select')}>K</h1>
+            <h1 className={C(cls.brand, 'no-select')}>Koreh</h1>
         </div>
         <div className={cls.center}>
         </div>
         <div className={cls.right}>
-            <div className={cls.icons}>
-                {socialIcons.map(icon => <SocialIcon key={icon.alt} {...icon} />)}
-                {animatedIcons.map(icon => <AnimatedIcon key={icon.name} {...icon} />)}
-            </div>
+            <TopBarIcons />
             <span className={C(cls.time, 'no-select')}>{moment(systemTime).format('ddd Do MMM HH:mm')}</span>
         </div>
     </nav>;
