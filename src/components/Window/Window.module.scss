@@ -1,0 +1,61 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$borderColor: $purple;
+$sideBorder: .4rem solid $borderColor;
+
+.window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: $white;
+    border-left: $sideBorder;
+    border-right: $sideBorder;
+    border-top: 1.8rem solid $borderColor;
+    border-bottom: $sideBorder;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    @include z-elevation-3;
+
+    .topBar {
+        position: fixed;
+        margin-top: -1.3rem;
+        margin-left: .2rem;
+        user-select: none;
+        cursor: pointer;
+
+        .button {
+            @include box-size(.9rem, .9rem);
+            border-radius: 100rem;
+            display: inline-block;
+            margin-right: .3rem;
+            cursor: pointer;
+
+            &:hover {
+                opacity: .6;
+            }
+
+            &:first-child {
+                background-color: $red;
+            }
+
+            &:nth-child(2) {
+                background-color: $yellow;
+            }
+
+            &:last-child {
+                background-color: $green;
+            }
+        }
+    }
+
+    .content {
+        @include box-size(100%, 100%);
+
+        & > * {
+            color: $black;
+        }
+    }
+}
