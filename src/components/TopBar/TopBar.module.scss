@@ -2,7 +2,7 @@
 @import '../../scss/mixins';
 
 .topBar {
-    @include box-size(100%, 2rem);
+    @include box-size(100%, $topBarHeight);
     @include flex;
     @include z-elevation-2;
     position: fixed;

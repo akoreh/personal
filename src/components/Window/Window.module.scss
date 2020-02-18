@@ -5,6 +5,8 @@ $borderColor: $purple;
 $sideBorder: .4rem solid $borderColor;
 
 .window {
+    @include z-elevation-4;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,7 +19,23 @@ $sideBorder: .4rem solid $borderColor;
     border-bottom: $sideBorder;
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
-    @include z-elevation-3;
+    transition: all .4s cubic-bezier(.75,-0.5,0,1.75);
+
+    &.fullscreen {
+        width: 100% !important;
+        height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important;
+        top: $topBarHeight;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+        border: none;
+
+        .topBar {
+            margin-top: -$topBarHeight + ($topBarHeight / 4);
+            margin-left: .5rem;
+            z-index: $topBarZIndex + 1;
+        }
+    }
 
     .topBar {
         position: fixed;

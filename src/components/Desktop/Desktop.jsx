@@ -6,7 +6,7 @@ import Window from '../Window/Window';
 
 import AppComingSoon from '../../apps/ComingSoon/ComingSoon';
 
-import { LOADING_SCROLL_DURATION } from '../../constants';
+import { IS_DEV, LOADING_SCROLL_DURATION } from '../../constants';
 
 import backgrounds from './backgrounds';
 
@@ -16,7 +16,7 @@ const Desktop = () => {
     const [comingSoon, setComingSoon] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setComingSoon(true), LOADING_SCROLL_DURATION * 1000);
+        setTimeout(() => setComingSoon(true), IS_DEV ? 0 : LOADING_SCROLL_DURATION * 1000);
     }, []);
 
     return <div className={cls.desktop} style={{paddingTop: '5rem'}}>
