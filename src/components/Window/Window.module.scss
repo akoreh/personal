@@ -3,27 +3,26 @@
 
 $borderColor: $purple;
 $sideBorder: .4rem solid $borderColor;
+$topBorderHeight: 1.8rem;
 
 .window {
     @include z-elevation-4;
 
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     background: $white;
     border-left: $sideBorder;
     border-right: $sideBorder;
-    border-top: 1.8rem solid $borderColor;
+    border-top: $topBorderHeight solid $borderColor;
     border-bottom: $sideBorder;
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
-    transition: all .4s cubic-bezier(.75,-0.5,0,1.75);
+    transition: .4s cubic-bezier(.75,-0.5,0,1.75);
+    transition-property: width, height;
 
     &.fullscreen {
         width: 100% !important;
         height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important;
+        transform: none !important;
         top: $topBarHeight;
         left: 0;
         transform: none;
@@ -35,6 +34,16 @@ $sideBorder: .4rem solid $borderColor;
             margin-left: .5rem;
             z-index: $topBarZIndex + 1;
         }
+
+        .dragHandle {
+            display: none;
+        }
+    }
+
+    .dragHandle {
+        width: 100%;
+        height: $topBorderHeight;
+        margin-top: -$topBorderHeight;
     }
 
     .topBar {
