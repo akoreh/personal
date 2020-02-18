@@ -1,13 +1,14 @@
 @import '../../scss/variables';
+@import '../../scss/mixins';
 
 .topBar {
+    @include box-size(100%, 2rem);
+    @include flex;
+    @include z-elevation-2;
     position: fixed;
     left: 0;
     right: 0;
-    display: flex;
-    height: 2rem;
     background-color: $darkPurple;
-    width: 100%;
     z-index: $topBarZIndex;
     padding: 0 1.5rem;
     transform: translateY(-100%);
@@ -15,13 +16,12 @@
     .left,
     .center,
     .right {
-        display: flex;
-        align-items: center;
+        @include flex(normal, center);
     }
 
     .left {
         flex: 1;
-        justify-content: center;
+        @include flex(center, center);
 
         .brand {
             font-size: .9rem;
