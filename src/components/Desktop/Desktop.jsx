@@ -22,7 +22,7 @@ const Desktop = () => {
     return <div className={cls.desktop} style={{paddingTop: '5rem'}}>
         <ParallaxBackground layers={backgrounds[0].layers}/>
         <DesktopIcons />
-        {comingSoon && <Window id={'test'} style={{width: '40%', height: '45vh', zIndex: 500}}> 
+        {comingSoon && <Window id={'test'} style={{width: '40%', height: '45%', zIndex: 500}}> 
             <AppComingSoon />        
         </Window>}
     </div>;
