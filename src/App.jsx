@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
 import { TimelineMax, TweenMax } from 'gsap';
 
+import TopBar from './components/TopBar/TopBar';
 import Desktop from './components/Desktop/Desktop';
+import Dock from './components/Dock/Dock';
 
-import { IS_DEV, LOADING_SCREEN_TIME, LOADING_SCREEN_FADE_DURATION, SCROLL_TO_TOP_DURATION} from './constants';
+import { IS_DEV, L_S_TIME, L_S_FADE_DURATION, LOADING_SCROLL_DURATION} from './constants';
 
 import cls from './App.module.scss';
-import TopBar from './components/TopBar/TopBar';
 
 
 function App() {
   const showCursor = () => {
-    const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION + SCROLL_TO_TOP_DURATION;
-    TweenMax.set(document.body, {cursor: '', delay: IS_DEV ? 0 : delay});
-};
+    TweenMax.set(document.body, {cursor: '', delay: IS_DEV ? 0 : LOADING_SCROLL_DURATION});
+  };
 
   const hideLoadingScreen = () => {
     const loadingScreen = document.querySelector('#loading');
     const loadingScreenTimeline = new TimelineMax();
 
     loadingScreenTimeline
-      .to(loadingScreen, LOADING_SCREEN_FADE_DURATION, {autoAlpha: 0}, `+=${IS_DEV ? .2 : LOADING_SCREEN_TIME}`)
+      .to(loadingScreen, L_S_FADE_DURATION, {autoAlpha: 0}, `+=${IS_DEV ? .2 : L_S_TIME}`)
       .set(loadingScreen, {display: 'none'});
   };
 
@@ -32,6 +32,9 @@ function App() {
   return <div className={cls.app}>
     <TopBar />
     <Desktop />
+    <div className={cls.dock}>
+      <Dock />
+    </div>
   </div>
 }
 

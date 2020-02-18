@@ -1,3 +1,13 @@
+@import './scss/variables';
+@import './scss/mixins';
+
 .app {
     height: 100vh;
+
+    .dock {
+        @include flex(center, flex-end);
+        @include box-size(100%, $dockHeight);
+        position: absolute;
+        bottom: 0;
+    }
 }

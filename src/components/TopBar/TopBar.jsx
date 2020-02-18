@@ -3,7 +3,7 @@ import moment from 'moment';
 import { TweenMax, Expo } from 'gsap';
 
 import { systemTimeContext } from '../../store/SystemTimeProvider';
-import { IS_DEV, LOADING_SCREEN_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
+import { IS_DEV, L_S_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
 
 import { C } from '../../util';
 
@@ -15,7 +15,7 @@ const TopBar = () => {
     const topBarRef = createRef();
 
     const animateTopBar = () => {
-        const delay = LOADING_SCREEN_TIME + SCROLL_TO_TOP_DURATION;
+        const delay = L_S_TIME + SCROLL_TO_TOP_DURATION;
         const target = topBarRef.current;
         
         if (IS_DEV) {

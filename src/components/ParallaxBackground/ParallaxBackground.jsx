@@ -3,7 +3,7 @@ import { TweenMax } from 'gsap';
 
 import ParallaxLayer from './ParallaxLayer/ParallaxLayer';
 
-import { IS_DEV, SCROLL_TO_TOP_DURATION, LOADING_SCREEN_TIME, LOADING_SCREEN_FADE_DURATION } from '../../constants';
+import { IS_DEV, SCROLL_TO_TOP_DURATION, L_S_TIME, L_S_FADE_DURATION } from '../../constants';
 
 import cls from './ParallaxBackground.module.scss';
 
@@ -18,7 +18,7 @@ const ParallaxBackground = ({layers}) => {
         if (IS_DEV) {
             TweenMax.set(target, {scrollTo: {x: 0, y: 0}});
         } else {
-            const delay = LOADING_SCREEN_TIME + LOADING_SCREEN_FADE_DURATION;
+            const delay = L_S_TIME + L_S_FADE_DURATION;
             TweenMax.to(target, SCROLL_TO_TOP_DURATION, {scrollTo: {x: 0, y: 0}, delay});
         }
     }

@@ -1,0 +1,55 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$averageScale: 1.2;
+$highScale: 1.7;
+$colorLight: #ffffff;
+
+.dock {
+    transform: translateY($dockHeight * 2);
+    @include flex(space-around, center);
+    @include box-size(auto, $dockHeight);
+    position: relative;
+    list-style: none;
+    background: linear-gradient(to bottom, rgba(255,88,61, 0.3) 0%, rgba(202,41,62, 0.6) 100%);
+    border-radius: 5px 5px 0 0;
+
+    & > .icon {
+        display: block;
+        @include box-size(45px, 45px);
+        background-size: 38px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor: pointer;
+        text-align: center;
+        transform: scale(1);
+        transform-origin: center bottom;
+        transition: all 0.3s;
+        
+        &:hover {
+            transform: scale($highScale);
+            margin: 0 1em;
+        }
+
+        &:nth-child(1) { @include bg_url("https://i.postimg.cc/0QsLtJB3/appstore.png");}
+		&:nth-child(2) { @include bg_url("https://i.postimg.cc/7ZJdwVvd/calculator.png");}
+		&:nth-child(3) { @include bg_url("https://i.postimg.cc/Bbv7y5ch/calendar.png");}
+		&:nth-child(4) { @include bg_url("https://i.postimg.cc/8cnXVFZT/contacts.png");}
+		&:nth-child(5) { @include bg_url("https://i.postimg.cc/q75Gqf8G/dictionnary.png");}
+		&:nth-child(6) { @include bg_url("https://i.postimg.cc/kGrFNxY6/facetime.png");}
+		&:nth-child(7) { @include bg_url("https://i.postimg.cc/66RhWmTd/gamecenter.png");}
+		&:nth-child(8) { @include bg_url("https://i.postimg.cc/brQ0ms46/ibooks.png");}
+		&:nth-child(9) { @include bg_url("https://i.postimg.cc/pdFmf3wC/launchpad.png");}
+		&:nth-child(10) {@include bg_url("https://i.postimg.cc/0j8rqjbX/mail.png");}
+		&:nth-child(11) {@include bg_url("https://i.postimg.cc/K8dHpgWb/maps.png");}
+		&:nth-child(12) {@include bg_url("https://i.postimg.cc/Fs6W1LNS/messages.png");}
+		&:nth-child(13) {@include bg_url("https://i.postimg.cc/FHJPSHHB/missioncontrol.png");}
+		&:nth-child(14) {@include bg_url("https://i.postimg.cc/SNR1yrFq/notes.png");}
+		&:nth-child(15) {@include bg_url("https://i.postimg.cc/qRpQWcXP/preview.png");}
+		&:nth-child(16) {@include bg_url("https://i.postimg.cc/44BFk00B/reminders.png");}
+		&:nth-child(17) {@include bg_url("https://i.postimg.cc/9fdJxgTP/safari.png");}
+		&:nth-child(18) {@include bg_url("https://i.postimg.cc/D0Z6w2N5/systempreferences.png");}
+		&:nth-child(19) {@include bg_url("https://i.postimg.cc/3w5tFQyJ/textedit.png");}
+		&:nth-child(20) {@include bg_url("https://i.postimg.cc/J02qyfV8/timemachine.png");}
+    }
+}
