@@ -16,10 +16,10 @@ $topBorderHeight: 1.8rem;
     border-bottom: $sideBorder;
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
-    transition: .4s cubic-bezier(.75,-0.5,0,1.75);
-    transition-property: width, height;
+    transition: width, height .4s cubic-bezier(.75,-0.5,0,1.75);
+    transform-origin: center;
 
-    &.fullscreen {
+    &.maximized {
         width: 100% !important;
         height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important;
         transform: none !important;
@@ -28,12 +28,6 @@ $topBorderHeight: 1.8rem;
         transform: none;
         border-radius: 0;
         border: none;
-
-        .topBar {
-            margin-top: -$topBarHeight + ($topBarHeight / 4);
-            margin-left: .5rem;
-            z-index: $topBarZIndex + 1;
-        }
 
         .dragHandle {
             display: none;
@@ -46,36 +40,10 @@ $topBorderHeight: 1.8rem;
         margin-top: -$topBorderHeight;
     }
 
-    .topBar {
+    .buttons {
         position: fixed;
         margin-top: -1.3rem;
         margin-left: .2rem;
-        user-select: none;
-        cursor: pointer;
-
-        .button {
-            @include box-size(.9rem, .9rem);
-            border-radius: 100rem;
-            display: inline-block;
-            margin-right: .3rem;
-            cursor: pointer;
-
-            &:hover {
-                opacity: .6;
-            }
-
-            &:first-child {
-                background-color: $red;
-            }
-
-            &:nth-child(2) {
-                background-color: $yellow;
-            }
-
-            &:last-child {
-                background-color: $green;
-            }
-        }
     }
 
     .content {

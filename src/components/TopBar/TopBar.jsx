@@ -3,15 +3,19 @@ import moment from 'moment';
 import { TweenMax, Expo } from 'gsap';
 
 import { systemTimeContext } from '../../store/SystemTimeProvider';
+import { windowsContext } from '../../store/WindowsProvider';
 import { IS_DEV, L_S_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
 
 import { C } from '../../util';
 
 import cls from './TopBar.module.scss';
 import TopBarIcons from './TopBarIcons';
+import WindowButtons from '../WindowButtons/WindowButtons';
 
 const TopBar = () => {
     const systemTime = useContext(systemTimeContext);
+    const { getMaximizedWindow, closeWindow, maximizeWindow } = useContext(windowsContext);
+    const maximizedWindow = getMaximizedWindow();
     const topBarRef = createRef();
 
     const animateTopBar = () => {
@@ -27,9 +31,19 @@ const TopBar = () => {
 
     useEffect(animateTopBar, []);
 
+    console.log('maximizedWindow', maximizedWindow);
+
     return <nav className={cls.topBar} ref={topBarRef}>
         <div className={cls.left}>
-            <h1 className={C(cls.brand, 'no-select')}>Koreh</h1>
+            {maximizedWindow && (
+                <WindowButtons 
+                    onClose={closeWindow.bind(this, maximizedWindow.id)}
+                    onMaximize={maximizeWindow.bind(this, maximizedWindow.id)}
+                />
+            )}
+            <h1 className={cls.brand}>
+                {!maximizedWindow ? 'Koreh' : maximizedWindow.title}
+            </h1>
         </div>
         <div className={cls.center}>
         </div>

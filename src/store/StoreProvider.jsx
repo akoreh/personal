@@ -1,10 +1,13 @@
 import React from 'react';
 
 import SystemTimeProvider from './SystemTimeProvider';
+import WindowsProvider from './WindowsProvider';
 
 const StoreProvider = ({children}) => (
     <SystemTimeProvider>
-        {children}
+        <WindowsProvider>
+            {children}
+        </WindowsProvider>
     </SystemTimeProvider>
 );
 
