@@ -1,0 +1,23 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$highScale: 1.7;
+$iconSize: 2.5rem;
+
+.icon {
+    display: block;
+    @include box-size(auto, $iconSize);
+    background-size: 38px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    text-align: center;
+    transform: scale(1);
+    transform-origin: center bottom;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale($highScale);
+        margin: 0 1em;
+    }
+}

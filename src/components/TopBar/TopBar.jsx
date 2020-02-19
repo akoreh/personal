@@ -31,8 +31,6 @@ const TopBar = () => {
 
     useEffect(animateTopBar, []);
 
-    console.log('maximizedWindow', maximizedWindow);
-
     return <nav className={cls.topBar} ref={topBarRef}>
         <div className={cls.left}>
             {maximizedWindow && (

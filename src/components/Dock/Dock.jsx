@@ -1,6 +1,8 @@
 import React, { createRef, useEffect } from 'react';
 import { TweenMax, Expo } from 'gsap';
 
+import DockIcons from './DockIcons';
+
 import { IS_DEV, LOADING_SCROLL_DURATION } from '../../constants';
 
 import cls from './Dock.module.scss';
@@ -21,26 +23,7 @@ const Dock = () => {
     useEffect(animateDock, []);
 
     return <div className={cls.dock} ref={dockRef}>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
-        <li className={cls.icon}></li>
+        <DockIcons />
     </div>;
 };
 
