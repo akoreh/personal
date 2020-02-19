@@ -3,7 +3,6 @@ import React from 'react';
 import Icon from '../Icons/Icon';
 
 import folderAnimationData from '../../assets/anim/folder.json'; 
-import BrowserIcon from '../../assets/img/icons/browser.svg';
 
 import cls from './DesktopIcons.module.scss';
 
@@ -17,13 +16,6 @@ const icons = [
         autoplay: false,
         speed: 0.5,
         content: <div>Projects</div>,
-    },
-    {
-        label: 'Internet',
-        key: 'internetIcon',
-        className: cls.browserIcon,
-        src: BrowserIcon,
-        content: <div>Internet</div>,
     }
 ];
 

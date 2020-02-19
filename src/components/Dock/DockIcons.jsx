@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import Icon from '../Icons/Icon';
 
+import BrowserIcon from '../../assets/img/icons/browser.svg';
 import EmailIcon from '../../assets/img/icons/email.svg';
 import GitHubIcon from '../../assets/img/icons/github.svg';
 import LinkedInIcon from '../../assets/img/icons/linkedin.svg';
@@ -13,6 +14,13 @@ import { C } from '../../util';
 import cls from './DockIcons.module.scss';
 
 const icons = [
+    {
+        key: 'internetIcon',
+        className: C(cls.icon, cls.browserIcon),
+        src: BrowserIcon,
+        content: <div>Internet</div>,
+        onClick: () => {}
+    },
     {
         key: 'dockEmail',
         className: cls.icon,
