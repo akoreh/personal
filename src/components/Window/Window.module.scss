@@ -6,7 +6,7 @@ $sideBorder: .4rem solid $borderColor;
 $topBorderHeight: 1.8rem;
 
 .window {
-    @include z-elevation-4;
+    @include z-elevation-2;
 
     position: absolute;
     background: $white;
@@ -16,7 +16,7 @@ $topBorderHeight: 1.8rem;
     border-bottom: $sideBorder;
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
-    transition: width, height .4s cubic-bezier(.75,-0.5,0,1.75);
+    transition: width, height, box-shadow .4s cubic-bezier(.75,-0.5,0,1.75);
     transform-origin: center;
 
     &.maximized {

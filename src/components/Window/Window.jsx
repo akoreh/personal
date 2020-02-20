@@ -27,7 +27,10 @@ const Window = ({ id, title, style, children, isMaximized, onClose, onMaximize }
         return parentDimension / 2 - size / 2;
     }
 
-    return <Draggable handle={`#${handleId}`} defaultPosition={centerCoordinates}>
+    return <Draggable 
+        handle={`#${handleId}`} 
+        defaultPosition={centerCoordinates}
+    >
         <div className={C(cls.window, isMaximized ? cls.maximized : '')} style={style}>
             <div id={handleId} className={cls.dragHandle}/>
             {!isMaximized && (

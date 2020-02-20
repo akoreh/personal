@@ -1,4 +1,5 @@
 @import './scss/variables';
+@import './scss/mixins';
 
 * {
   box-sizing: border-box;
@@ -26,4 +27,9 @@ code {
 
 .no-select {
   user-select: none;
+}
+
+.react-draggable-dragging {
+  @include z-elevation-4;
+  transform: scale(1.2);
 }
