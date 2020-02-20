@@ -1,4 +1,6 @@
-export const C = (...classes) => classes.join(' ');
+import { filter } from 'lodash';
+
+export const C = (...classes) => filter(classes).join(' ');
 
 export const percentageOfValue = (percentage, value) => {
     percentage = +percentage.toString().replace('%', '');

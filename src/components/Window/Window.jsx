@@ -7,7 +7,7 @@ import { C, percentageOfValue } from '../../util';
 
 import cls from './Window.module.scss';
 
-const Window = ({ id, title, style, children, isMaximized, onClose, onMaximize }) => {
+const Window = ({ id, style, children, isMaximized, isContentApp, onClose, onMaximize }) => {
     const handleId = `window__handle-${id}`;
     const centerCoordinates = {
         x: calculateCenterCoordinate(style.width, window.innerWidth),
@@ -31,7 +31,10 @@ const Window = ({ id, title, style, children, isMaximized, onClose, onMaximize }
         handle={`#${handleId}`} 
         defaultPosition={centerCoordinates}
     >
-        <div className={C(cls.window, isMaximized ? cls.maximized : '')} style={style}>
+        <div 
+            className={C(cls.window, isMaximized && cls.maximized, isContentApp && cls.app)} 
+            style={style}
+        >
             <div id={handleId} className={cls.dragHandle}/>
             {!isMaximized && (
                 <div className={cls.buttons}>

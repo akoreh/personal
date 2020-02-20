@@ -34,6 +34,23 @@ $topBorderHeight: 1.8rem;
         }
     }
 
+    &.app {
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        background: none;
+        border-radius: 20px;
+        
+        .buttons {
+            margin-left: 1rem;
+        }
+
+        .content > * {
+            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+    }
+
     .dragHandle {
         width: 100%;
         height: $topBorderHeight;
