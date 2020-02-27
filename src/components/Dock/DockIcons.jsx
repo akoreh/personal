@@ -7,6 +7,7 @@ import CalculatorIcon from '../../assets/img/icons/calculator.svg';
 import EmailIcon from '../../assets/img/icons/email.svg';
 import GitHubIcon from '../../assets/img/icons/github.svg';
 import LinkedInIcon from '../../assets/img/icons/linkedin.svg';
+import settingsAnimationData from '../../assets/anim/settings.json';
 
 import AppCalculator, {appSettings as calculatorSettings} from '../../apps/Calculator/Calculator';
 
@@ -56,7 +57,15 @@ const DockIcons = () => {
             src: LinkedInIcon,
             href: LINKED_IN,
             onClick: openLink
-        }
+        },
+        {
+            key: 'dockSettings',
+            className: C(cls.icon, cls.settingsIcon),
+            animationData: settingsAnimationData,
+            loop: true,
+            autoplay: true,
+            speed: 0.5,
+        },
     ];
 
     return <Fragment>
