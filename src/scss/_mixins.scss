@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin box-size($width, $height) {
 	width: $width;
 	height: $height;
@@ -45,4 +47,16 @@
 
 @mixin z-elevation-hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@mixin neumorphic {
+    box-shadow: 6px 6px 16px 0 $dark-high-light, -6px -6px 16px 0 $soft-high-light;
+}
+  
+@mixin insetNeumorphic {
+    box-shadow: inset 6px 6px 5px 0 $dark-high-light, inset -6px -6px 5px 0 $soft-high-light;
+}
+
+@mixin inOutNeumorphic {
+    box-shadow: 6px 6px 16px 0 $dark-high-light, -6px -6px 16px 0 $soft-high-light,inset 6px 6px 5px 0 $dark-high-light, inset -6px -6px 5px 0 $soft-high-light;
 }

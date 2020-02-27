@@ -14,6 +14,7 @@ import uuid from 'uuid/v1';
 /**
  * App Settings
  * @typedef {Object} AppSettings
+ * @property {string} appIdentifier - uniquely identifies an app (so you dont open it twice for example)
  * @property {string} width - css property, width of window
  * @property {string} height - css property, height of window
  * @property {boolean} isContentApp - if content is app the style of the window will be affected, the opposite is a folder
@@ -30,16 +31,20 @@ const WindowsProvider = ({ children }) => {
      * @param {AppSettings} appSettings  
      */
     const openWindow = (content, { width = '50%', height="40%", ...appSettings}) => {
-        setWindows([...windows, {
-            id: uuid(),
-            content,
-            style: {
-                width,
-                height,
-                zIndex: 500
-            },
-            ...appSettings
-        }]);
+        const windowAlreadyOpen = find(windows, ({appIdentifier}) => appIdentifier === appSettings.appIdentifier);
+
+        if (!windowAlreadyOpen) {
+            setWindows([...windows, {
+                id: uuid(),
+                content,
+                style: {
+                    width,
+                    height,
+                    zIndex: 500
+                },
+                ...appSettings
+            }]);
+        }
     };
 
     /**
