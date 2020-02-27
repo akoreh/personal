@@ -64,7 +64,7 @@ const DockIcons = () => {
             animationData: settingsAnimationData,
             loop: true,
             autoplay: true,
-            speed: 0.5,
+            speed: 0.3,
         },
     ];
 
