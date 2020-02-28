@@ -30,7 +30,7 @@ const WindowsProvider = ({ children }) => {
      * @param {JSXElement} content content component
      * @param {AppSettings} appSettings  
      */
-    const openWindow = (content, { width = '50%', height="40%", ...appSettings}) => {
+    const openWindow = (content, { width = '50%', height="60%", ...appSettings}) => {
         const windowAlreadyOpen = find(windows, ({appIdentifier}) => appIdentifier === appSettings.appIdentifier);
 
         if (!windowAlreadyOpen) {
