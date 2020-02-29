@@ -1,4 +1,5 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
 import Icon from '../Icons/Icon';
 
@@ -9,9 +10,9 @@ import GitHubIcon from '../../assets/img/icons/github.svg';
 import LinkedInIcon from '../../assets/img/icons/linkedin.svg';
 import settingsAnimationData from '../../assets/anim/settings.json';
 
-import AppCalculator, {appSettings as calculatorSettings} from '../../apps/Calculator/Calculator';
+import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
 
-import { windowsContext } from '../../store/WindowsProvider';
+import { openWindow } from '../../redux/windows/windows.actions';
 
 import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
 
@@ -19,8 +20,7 @@ import { C } from '../../util';
 
 import cls from './DockIcons.module.scss';
 
-const DockIcons = () => {
-    const { openWindow } = useContext(windowsContext);
+const DockIcons = ({ openWindow }) => {
     const openLink = ({href, target}) => window.open(href, target);
     
     const icons = [
@@ -34,7 +34,7 @@ const DockIcons = () => {
             key: 'dockCalculator',
             className: C(cls.icon, cls.calculatorIcon),
             src: CalculatorIcon,
-            onClick: openWindow.bind(null, <AppCalculator />, calculatorSettings)
+            onClick: openWindow.bind(null, calculatorAppOpts)
         },
         {
             key: 'dockEmail',
@@ -73,4 +73,8 @@ const DockIcons = () => {
     </Fragment>
 };
 
-export default DockIcons;
+const mapDispatchToProps = dispatch => ({
+    openWindow: windowOpts => dispatch(openWindow(windowOpts)),
+});
+
+export default connect(null, mapDispatchToProps)(DockIcons);

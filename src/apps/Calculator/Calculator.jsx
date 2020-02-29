@@ -10,25 +10,28 @@ const buttons = [
     [0, '.', '=']
 ];
 
-export const appSettings = {
-    appIdentifier: 'calculator',
-    title: 'Calculator',
-    width: '20%',
-    height: '50%',
-    isContentApp: true,
-};
-
 const AppCalculator = () => {
     return <div className={cls.calculator}>
         <div className={cls.display} />
         <div className={cls.buttons}>
-            {buttons.map(buttonRow => (
-                <div className={cls.buttonRow}>
-                    {buttonRow.map(label => <span className={cls.button}>{label}</span>)}
+            {buttons.map((buttonRow, index) => (
+                <div key={index} className={cls.buttonRow}>
+                    {buttonRow.map(label => <span key={label} className={cls.button}>{label}</span>)}
                 </div>
             ))}
         </div>
     </div>;
+};
+
+export const appOpts = {
+    appIdentifier: 'calculator',
+    content: <AppCalculator />,
+    type: 'app',
+    title: 'Calculator',
+    style: {
+        width: '20%',
+        height: '50%',
+    }
 };
 
 export default AppCalculator;

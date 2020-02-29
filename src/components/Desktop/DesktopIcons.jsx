@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import Icon from '../Icons/Icon';
 
 import folderAnimationData from '../../assets/anim/folder.json';
 
-import { windowsContext } from '../../store/WindowsProvider';
+import { openWindow } from '../../redux/windows/windows.actions'; 
+import { appOpts as folderAppOpts} from '../../apps/Folder/Folder';
 
 import cls from './DesktopIcons.module.scss';
-import Folder from '../../apps/Folder/Folder';
 
-const DesktopIcons = () => {
-    const { openWindow } = useContext(windowsContext);
-
+const DesktopIcons = ({ openWindow }) => {
     const icons = [
         {
             label: 'Projects',
@@ -21,16 +20,17 @@ const DesktopIcons = () => {
             loop: false,
             autoplay: false,
             speed: 0.5,
-            onClick: openWindow.bind(null, <Folder />, {
-                appIdentifier: 'projectsFolder',
-                title: 'Projects',
-            })
+            onClick: openWindow.bind(null, {appIdentifier: 'projectsFolder', title: 'Projects', ...folderAppOpts })
         },
     ];
 
     return <div className={cls.desktopIcons}>
         {icons.map(icon => <Icon key={icon.key} {...icon} />)}
     </div>
-}
+};
 
-export default DesktopIcons;
+const mapDispatchToProps = dispatch => ({
+    openWindow: appOpts => dispatch(openWindow(appOpts)),
+});
+
+export default connect(null, mapDispatchToProps)(DesktopIcons);

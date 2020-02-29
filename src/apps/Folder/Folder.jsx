@@ -22,4 +22,9 @@ const Folder = ({ icons }) => {
     </div>
 };
 
+export const appOpts = {
+    content: <Folder />,
+    type: 'folder',
+};
+
 export default Folder;

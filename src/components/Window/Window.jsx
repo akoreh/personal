@@ -1,13 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Draggable from 'react-draggable';
 
 import WindowButtons from '../WindowButtons/WindowButtons';
+
+import { closeWindow, toggleWindowMaximized } from '../../redux/windows/windows.actions';
 
 import { C, percentageOfValue } from '../../util';
 
 import cls from './Window.module.scss';
 
-const Window = ({ id, style, children, isMaximized, isContentApp, onClose, onMaximize }) => {
+const Window = ({ id, type, style, children, isMaximized, closeWindow, toggleWindowMaximized }) => {
     const handleId = `window__handle-${id}`;
     const centerCoordinates = {
         x: calculateCenterCoordinate(style.width, window.innerWidth),
@@ -32,13 +35,13 @@ const Window = ({ id, style, children, isMaximized, isContentApp, onClose, onMax
         defaultPosition={centerCoordinates}
     >
         <div 
-            className={C(cls.window, isMaximized && cls.maximized, isContentApp && cls.app)} 
+            className={C(cls.window, isMaximized && cls.maximized, type === 'app' && cls.app)} 
             style={style}
         >
             <div id={handleId} className={cls.dragHandle}/>
             {!isMaximized && (
                 <div className={cls.buttons}>
-                    <WindowButtons onClose={onClose} onMaximize={onMaximize}/>
+                    <WindowButtons onClose={closeWindow.bind(null, id)} onMaximize={toggleWindowMaximized.bind(null, id)}/>
                 </div>
             )}
             <div className={cls.content}>
@@ -48,4 +51,9 @@ const Window = ({ id, style, children, isMaximized, isContentApp, onClose, onMax
     </Draggable>;
 };
 
-export default Window;
+const mapDispatchToProps = dispatch => ({
+    closeWindow: id => dispatch(closeWindow(id)),
+    toggleWindowMaximized: id => dispatch(toggleWindowMaximized(id)),
+});
+
+export default connect(null, mapDispatchToProps)(Window);

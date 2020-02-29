@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/all';
 
-import StoreProvider from './store/StoreProvider';
-
-import * as serviceWorker from './serviceWorker';
-
 import App from './App';
+
+import store from './redux/store';
+import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 
-ReactDOM.render(<StoreProvider>
-    <App />
-</StoreProvider>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
+);
 
 gsap.registerPlugin(ScrollToPlugin);
 

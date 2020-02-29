@@ -1,4 +1,4 @@
-export const IS_DEV = true;
+export const IS_DEV = false;
 
 //Social Stuff
 export const EMAIL = 'koreh.andrei20@gmail.com';

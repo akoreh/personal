@@ -1,25 +1,27 @@
-import React, { useContext, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Window from '../Window/Window';
 
-import { windowsContext } from '../../store/WindowsProvider';
+import { selectOpenWindows } from '../../redux/windows/windows.selectors';
 
-const DesktopIcons = () => {
-    const { windows, closeWindow, maximizeWindow} = useContext(windowsContext);
-
-    return <Fragment>
-        {windows.map(window => (
+const DesktopWindows = ({ openWindows }) => (
+    <Fragment>
+        {openWindows.map(window => (
             <Window 
                 key={window.id} 
                 style={window.style}
-                onClose={closeWindow.bind(this, window.id)}
-                onMaximize={maximizeWindow.bind(this, window.id)}
                 {...window}
             >
                 {window.content}
             </Window>
         ))}
-    </Fragment>;
-};
+    </Fragment>
+);
 
-export default DesktopIcons;
+const mapStateToProps = createStructuredSelector({
+    openWindows: selectOpenWindows,
+});
+
+export default connect(mapStateToProps)(DesktopWindows);
