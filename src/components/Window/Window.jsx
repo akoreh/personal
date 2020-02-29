@@ -4,13 +4,24 @@ import Draggable from 'react-draggable';
 
 import WindowButtons from '../WindowButtons/WindowButtons';
 
-import { closeWindow, toggleWindowMaximized } from '../../redux/windows/windows.actions';
+import { closeWindow, toggleWindowMaximized, setWindowFocused } from '../../redux/windows/windows.actions';
 
 import { C, percentageOfValue } from '../../util';
 
 import cls from './Window.module.scss';
 
-const Window = ({ id, type, style, children, isMaximized, closeWindow, toggleWindowMaximized }) => {
+const Window = ({ 
+    id, 
+    type, 
+    style, 
+    children, 
+    isMaximized, 
+    isFocused,
+    //METHODS
+    closeWindow, 
+    toggleWindowMaximized, 
+    setWindowFocused
+}) => {
     const handleId = `window__handle-${id}`;
     const centerCoordinates = {
         x: calculateCenterCoordinate(style.width, window.innerWidth),
@@ -29,14 +40,26 @@ const Window = ({ id, type, style, children, isMaximized, closeWindow, toggleWin
 
         return parentDimension / 2 - size / 2;
     }
+    
+    function setFocused() {
+        if (!isFocused) {
+            setWindowFocused(id);
+        }
+    }
 
     return <Draggable 
         handle={`#${handleId}`} 
         defaultPosition={centerCoordinates}
+        onStart={setFocused}
     >
         <div 
-            className={C(cls.window, isMaximized && cls.maximized, type === 'app' && cls.app)} 
+            className={C(
+                cls.window, 
+                isMaximized && cls.maximized, type === 'app' && cls.app,
+                isFocused && cls.focused,
+            )}
             style={style}
+            onClick={setFocused}
         >
             <div id={handleId} className={cls.dragHandle}/>
             {!isMaximized && (
@@ -54,6 +77,7 @@ const Window = ({ id, type, style, children, isMaximized, closeWindow, toggleWin
 const mapDispatchToProps = dispatch => ({
     closeWindow: id => dispatch(closeWindow(id)),
     toggleWindowMaximized: id => dispatch(toggleWindowMaximized(id)),
+    setWindowFocused: id => dispatch(setWindowFocused(id)),
 });
 
 export default connect(null, mapDispatchToProps)(Window);

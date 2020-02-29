@@ -5,12 +5,12 @@ import Icon from '../Icons/Icon';
 
 import folderAnimationData from '../../assets/anim/folder.json';
 
-import { openWindow } from '../../redux/windows/windows.actions'; 
+import { openWindowAndSetFocused } from '../../redux/windows/windows.actions'; 
 import { appOpts as folderAppOpts} from '../../apps/Folder/Folder';
 
 import cls from './DesktopIcons.module.scss';
 
-const DesktopIcons = ({ openWindow }) => {
+const DesktopIcons = ({ openWindowAndSetFocused }) => {
     const icons = [
         {
             label: 'Projects',
@@ -20,7 +20,7 @@ const DesktopIcons = ({ openWindow }) => {
             loop: false,
             autoplay: false,
             speed: 0.5,
-            onClick: openWindow.bind(null, {appIdentifier: 'projectsFolder', title: 'Projects', ...folderAppOpts })
+            onClick: openWindowAndSetFocused.bind(null, {id: 'projectsFolder', title: 'Projects', ...folderAppOpts })
         },
     ];
 
@@ -30,7 +30,7 @@ const DesktopIcons = ({ openWindow }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    openWindow: appOpts => dispatch(openWindow(appOpts)),
+    openWindowAndSetFocused: appOpts => dispatch(openWindowAndSetFocused(appOpts)),
 });
 
 export default connect(null, mapDispatchToProps)(DesktopIcons);

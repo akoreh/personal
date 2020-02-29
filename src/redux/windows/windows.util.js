@@ -1,5 +1,4 @@
 import { filter, map, find } from 'lodash';
-import uuid from 'uuid/v1';
 
 const DEFAULT_OPTS = {
     type: 'folder', //folder / app
@@ -11,7 +10,7 @@ const DEFAULT_OPTS = {
 };
 
 export const openWindow = (openWindows, appOpts) => {
-    const windowAlreadyOpen = find(openWindows, openWindow => openWindow.appIdentifier === appOpts.appIdentifier);
+    const windowAlreadyOpen = find(openWindows, openWindow => openWindow.id === appOpts.id);
 
     if (windowAlreadyOpen) {
         return openWindows;
@@ -27,8 +26,12 @@ export const toggleWindowMaximized = (openWindows, id) => map(openWindows, openW
     isMaximized: openWindow.id === id ? !openWindow.isMaximized : false,
 }));
 
+export const setWindowFocused = (openWindows, id) => map(openWindows, openWindow => ({
+    ...openWindow,
+    isFocused: openWindow.id === id ? true : false,
+}));
+
 const createNewWindow = (appOpts) => ({
-    id: uuid(),
     ...DEFAULT_OPTS,
     ...appOpts
 });

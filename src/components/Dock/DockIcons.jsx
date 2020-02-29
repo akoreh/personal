@@ -12,7 +12,7 @@ import settingsAnimationData from '../../assets/anim/settings.json';
 
 import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
 
-import { openWindow } from '../../redux/windows/windows.actions';
+import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
 
 import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
 
@@ -20,7 +20,7 @@ import { C } from '../../util';
 
 import cls from './DockIcons.module.scss';
 
-const DockIcons = ({ openWindow }) => {
+const DockIcons = ({ openWindowAndSetFocused }) => {
     const openLink = ({href, target}) => window.open(href, target);
     
     const icons = [
@@ -34,7 +34,7 @@ const DockIcons = ({ openWindow }) => {
             key: 'dockCalculator',
             className: C(cls.icon, cls.calculatorIcon),
             src: CalculatorIcon,
-            onClick: openWindow.bind(null, calculatorAppOpts)
+            onClick: openWindowAndSetFocused.bind(null, calculatorAppOpts)
         },
         {
             key: 'dockEmail',
@@ -74,7 +74,7 @@ const DockIcons = ({ openWindow }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    openWindow: windowOpts => dispatch(openWindow(windowOpts)),
+    openWindowAndSetFocused: windowOpts => dispatch(openWindowAndSetFocused(windowOpts)),
 });
 
 export default connect(null, mapDispatchToProps)(DockIcons);

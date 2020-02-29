@@ -1,5 +1,5 @@
 import WindowActionTypes from './windows.types';
-import { openWindow, closeWindow, toggleWindowMaximized } from './windows.util';
+import { openWindow, closeWindow, toggleWindowMaximized, setWindowFocused} from './windows.util';
 
 const INITIAL_STATE = {
     openWindows: [],
@@ -21,7 +21,12 @@ const windowsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 openWindows: toggleWindowMaximized(state.openWindows, action.payload),
-            }
+            };
+        case WindowActionTypes.SET_WINDOW_FOCUSED:
+            return {
+                ...state,
+                openWindows: setWindowFocused(state.openWindows, action.payload),
+            };
         default:
             return state;
     }

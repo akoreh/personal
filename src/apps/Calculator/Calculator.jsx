@@ -24,7 +24,7 @@ const AppCalculator = () => {
 };
 
 export const appOpts = {
-    appIdentifier: 'calculator',
+    id: 'calculator',
     content: <AppCalculator />,
     type: 'app',
     title: 'Calculator',

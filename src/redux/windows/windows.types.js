@@ -2,6 +2,7 @@ const WindowActionTypes = {
     OPEN_WINDOW: 'OPEN_WINDOW',
     CLOSE_WINDOW: 'CLOSE_WINDOW',
     TOGGLE_WINDOW_MAXIMIZED: 'TOGGLE_WINDOW_MAXIMIZED',
+    SET_WINDOW_FOCUSED: 'SET_WINDOW_FOCUSED',
 };
 
 export default WindowActionTypes;

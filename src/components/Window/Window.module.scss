@@ -34,6 +34,10 @@ $topBorderHeight: 1.8rem;
         }
     }
 
+    &.focused {
+        z-index: $topBarZIndex;
+    }
+
     &.app {
         border-bottom: none;
         border-left: none;
