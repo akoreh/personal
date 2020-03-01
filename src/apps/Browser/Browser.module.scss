@@ -1,0 +1,37 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$tabBarHeight: $windowToolbarHeight;
+
+.browser {
+    @include box-size(100%, 100%);
+    background: $black;
+
+    .tabs {
+
+        @include box-size(auto, $tabBarHeight);
+        @include flex();
+        position: absolute;
+        top: -$tabBarHeight + 2px;
+        left: 6rem;
+
+        .tab {
+            position: relative;
+            background-color: $purple;
+            padding: 0 2rem;
+            transition: .5s all;
+
+            &:hover,
+            &.active {
+                background: $darkPurple;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            .tabLabel {
+                color: $white;
+                font-size: .8rem;
+            }
+        }
+    }
+}

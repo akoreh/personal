@@ -45,7 +45,7 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
                 />
             )}
             <h1 className={cls.brand}>
-                {!maximizedWindow ? 'Koreh' : maximizedWindow.title}
+                {!maximizedWindow && 'Koreh'}
             </h1>
         </div>
         <div className={cls.center}>

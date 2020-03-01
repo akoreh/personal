@@ -13,7 +13,9 @@
     @include flex(center, center);
     @include box-size(100%, 100%);
 
-    p {
+    .message {
         color: $black;
+        font-size: 1.2rem;
+        font-weight: bold;
     }
 }

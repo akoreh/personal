@@ -17,6 +17,13 @@ const DesktopIcons = ({ openWindowAndSetFocused }) => {
             className: cls.folderIcon,
             onClick: openFolder,
         },
+        {
+            ...folderIcon,
+            label: 'UI/UX',
+            id: 'uiuxfolder',
+            className: cls.folderIcon,
+            onClick: openFolder,
+        },
     ];
 
     function openFolder() {
