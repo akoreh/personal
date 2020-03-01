@@ -18,7 +18,7 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
     const topBarRef = createRef();
     const [systemTime, setSystemTime] = useState(new Date());
 
-    const animateTopBar = () => {
+    function animateTopBar () {
         const delay = L_S_TIME + SCROLL_TO_TOP_DURATION;
         const target = topBarRef.current;
         
@@ -29,11 +29,20 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
         }
     };
 
-    useEffect(() => {
-        animateTopBar();
-        // const sysTimeInterval = setInterval(() => setSystemTime(new Date()), 1000);
+    function updateSystemTime() {
+        const now = new Date();
 
-        // return () => clearInterval(sysTimeInterval);
+        if (now.getMinutes() !== systemTime.getMinutes()) {
+            setSystemTime(now);
+        }
+    }
+
+    useEffect(() => {
+        const sysTimeInterval = setInterval(updateSystemTime, 5000);
+
+        animateTopBar();
+
+        return () => clearInterval(sysTimeInterval);
     }, []);
 
     return <nav className={cls.topBar} ref={topBarRef}>
