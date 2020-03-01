@@ -23,10 +23,7 @@ const Window = ({
     setWindowFocused
 }) => {
     const handleId = `window__handle-${id}`;
-    const centerCoordinates = {
-        x: calculateCenterCoordinate(style.width, window.innerWidth),
-        y: calculateCenterCoordinate(style.height, window.innerHeight)
-    };
+    const centerX  = calculateCenterCoordinate(style.width, window.innerWidth)
 
     function calculateCenterCoordinate (size, parentDimension) {
         if (size.indexOf('vh') !== -1 || size.indexOf('vw') !== -1) {
@@ -38,7 +35,7 @@ const Window = ({
             size = percentageOfValue(size, parentDimension);
         }
 
-        return parentDimension / 2 - size / 2;
+        return (parentDimension / 2) - (size / 2);
     }
     
     function setFocused() {
@@ -49,7 +46,7 @@ const Window = ({
 
     return <Draggable 
         handle={`#${handleId}`} 
-        defaultPosition={centerCoordinates}
+        defaultPosition={{x: centerX, y: 0}}
         onStart={setFocused}
     >
         <div 

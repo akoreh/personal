@@ -3,7 +3,6 @@
 
 $borderColor: $purple;
 $sideBorder: .4rem solid $borderColor;
-$topBorderHeight: 1.8rem;
 
 .window {
     @include z-elevation-2;
@@ -12,7 +11,7 @@ $topBorderHeight: 1.8rem;
     background: $white;
     border-left: $sideBorder;
     border-right: $sideBorder;
-    border-top: $topBorderHeight solid $borderColor;
+    border-top: $windowToolbarHeight solid $borderColor;
     border-bottom: $sideBorder;
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
@@ -56,19 +55,22 @@ $topBorderHeight: 1.8rem;
     }
 
     .dragHandle {
+        position: absolute;
         width: 100%;
-        height: $topBorderHeight;
-        margin-top: -$topBorderHeight;
+        height: $windowToolbarHeight;
+        top: -$windowToolbarHeight;
     }
 
     .buttons {
         position: fixed;
-        margin-top: -1.3rem;
+        top: -$windowToolbarHeight / 1.4;
         margin-left: .2rem;
     }
 
     .content {
-        @include box-size(100%, 100%);
+        @include box-size(100%, calc(100% + 1px));
+        position: relative;
+        top: -1px;
 
         & > * {
             color: $black;
