@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { find, get } from 'lodash';
 
 import Icon from '../Icons/Icon';
 
@@ -11,8 +13,10 @@ import LinkedInIcon from '../../assets/img/icons/linkedin.svg';
 import settingsAnimationData from '../../assets/anim/settings.json';
 
 import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
+import { appOpts as browserAppOpts } from '../../apps/Browser/Browser';
 
 import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
+import { selectOpenApps, selectOpenFolders } from '../../redux/windows/windows.selectors';
 
 import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
 
@@ -20,21 +24,21 @@ import { C } from '../../util';
 
 import cls from './DockIcons.module.scss';
 
-const DockIcons = ({ openWindowAndSetFocused }) => {
-    const openLink = ({href, target}) => window.open(href, target);
-    
+const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
     const icons = [
         {
             key: 'dockInternet',
             className: C(cls.icon, cls.browserIcon),
             src: BrowserIcon,
-            onClick: () => {}
+            appOpts: browserAppOpts,
+            onClick: onAppIconClick,
         },
         {
             key: 'dockCalculator',
             className: C(cls.icon, cls.calculatorIcon),
             src: CalculatorIcon,
-            onClick: openWindowAndSetFocused.bind(null, calculatorAppOpts)
+            appOpts: calculatorAppOpts,
+            onClick: onAppIconClick,
         },
         {
             key: 'dockEmail',
@@ -42,21 +46,21 @@ const DockIcons = ({ openWindowAndSetFocused }) => {
             src: EmailIcon,
             href: `mailto:${EMAIL}`,
             target: '_self',
-            onClick: openLink
+            onClick: onLinkClick,
         },
         {
             key: 'dockGitHub',
             className: cls.icon,
             src: GitHubIcon,
             href: GIT_HUB,
-            onClick: openLink
+            onClick: onLinkClick,
         },
         {
             key: 'dockLinkedIn',
             className: cls.icon,
             src: LinkedInIcon,
             href: LINKED_IN,
-            onClick: openLink
+            onClick: onLinkClick,
         },
         {
             key: 'dockSettings',
@@ -65,17 +69,42 @@ const DockIcons = ({ openWindowAndSetFocused }) => {
             loop: true,
             autoplay: true,
             speed: 0.3,
-            onClick: () => {}
+            onClick: () => {},
         },
     ];
 
+    function onLinkClick() {
+        window.open(this.href, this.target)
+    }
+
+    function onAppIconClick() {
+        openWindowAndSetFocused(this.appOpts);
+    }
+
+    function iconAppIsRunning(appId) {
+        if(!appId) {
+            return false;
+        }
+
+        return find(openApps, {id: appId});
+    }
+
     return <Fragment>
-        {icons.map(icon => <Icon key={icon.key} {...icon} />)}
+        {icons.map(icon => {
+            return <div className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
+                <Icon key={icon.key} {...icon} />
+            </div>
+        })}
     </Fragment>
 };
+
+const mapStateToProps = createStructuredSelector({
+    openApps: selectOpenApps,
+    openFolders: selectOpenFolders,
+});
 
 const mapDispatchToProps = dispatch => ({
     openWindowAndSetFocused: windowOpts => dispatch(openWindowAndSetFocused(windowOpts)),
 });
 
-export default connect(null, mapDispatchToProps)(DockIcons);
+export default connect(mapStateToProps, mapDispatchToProps)(DockIcons);

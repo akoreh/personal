@@ -22,6 +22,22 @@ $iconSize: 2.5rem;
     }
 }
 
+.dockIcon{
+    &.appRunning:hover:after {
+        transform:scale(1.3);
+        margin-left: $iconSize / 2.5;
+    }
+
+    &.appRunning:after {
+        @include box-size(auto, 3px);
+        content: '';
+        border-bottom: 3px solid #fe346e;
+        width: $iconSize;
+        position: absolute;
+        bottom: 0;
+        transition: all 0.3s;
+    }
+}
 .browserIcon {
     height: 2.2rem;
 }
