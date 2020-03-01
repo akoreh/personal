@@ -31,9 +31,9 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
 
     useEffect(() => {
         animateTopBar();
-        const sysTimeInterval = setInterval(() => setSystemTime(new Date()), 1000);
+        // const sysTimeInterval = setInterval(() => setSystemTime(new Date()), 1000);
 
-        return () => clearInterval(sysTimeInterval);
+        // return () => clearInterval(sysTimeInterval);
     }, []);
 
     return <nav className={cls.topBar} ref={topBarRef}>

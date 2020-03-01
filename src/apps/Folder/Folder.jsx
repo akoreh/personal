@@ -2,6 +2,8 @@ import React from 'react';
 
 import Icon from '../../components/Icons/Icon';
 
+import folderAnimationData from '../../assets/anim/folder.json';
+
 import cls from './Folder.module.scss';
 
 const EmptyFolderContent = () => (
@@ -25,6 +27,13 @@ const Folder = ({ icons }) => {
 export const appOpts = {
     content: <Folder />,
     type: 'folder',
+};
+
+export const folderIcon = {
+    animationData: folderAnimationData,
+    loop: false,
+    autoplay: false,
+    playOnHover: true,
 };
 
 export default Folder;

@@ -65,6 +65,7 @@ const DockIcons = ({ openWindowAndSetFocused }) => {
             loop: true,
             autoplay: true,
             speed: 0.3,
+            onClick: () => {}
         },
     ];
 

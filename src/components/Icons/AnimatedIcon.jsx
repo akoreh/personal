@@ -4,16 +4,18 @@ import lottie from 'lottie-web';
 const AnimatedIcon = ({
     key,
     autoplay, 
+    playOnHover,
     speed = 1, 
     startDelay = 0,
     className,
-    style, 
+    style,
     ...props 
 }) => {
     const base = createRef();
+    let animation;
 
-    const initAnimation = () => {
-        const animation = lottie.loadAnimation({
+    function initAnimation () {
+        animation = lottie.loadAnimation({
             container: base.current,
             ...props,
             autoplay: false,
@@ -21,12 +23,15 @@ const AnimatedIcon = ({
 
         animation.setSpeed(speed);
 
-        setTimeout(() => {
-            if (autoplay) {
-                animation.play();
-            }
-        }, startDelay * 1000);
+        if (autoplay) {
+            setTimeout(playAnimation, startDelay * 1000);
+        }
     };
+
+    function playAnimation(direction = 1) {
+        animation.setDirection(direction);
+        animation.play();
+    }
 
     useEffect(initAnimation, []);
 
@@ -34,7 +39,9 @@ const AnimatedIcon = ({
         id={`lottie_${key}`} 
         className={className} 
         style={style} 
-        ref={base} 
+        ref={base}
+        onMouseEnter={() => playOnHover && playAnimation()}
+        onMouseLeave={() => playOnHover && playAnimation(-1)}
     />;
 };
 

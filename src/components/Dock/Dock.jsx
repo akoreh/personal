@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import { TweenMax, Expo } from 'gsap';
+import { TweenLite, Expo } from 'gsap';
 
 import DockIcons from './DockIcons';
 
@@ -14,9 +14,9 @@ const Dock = () => {
         const target = dockRef.current;
         
         if (IS_DEV) {
-            TweenMax.set(target, {y: 0});
+            TweenLite.set(target, {y: 0});
         } else {
-            TweenMax.to(target, 1, {y: 0, ease: Expo.easeOut, delay: LOADING_SCROLL_DURATION - .5});
+            TweenLite.to(target, 1, {y: 0, ease: Expo.easeOut, delay: LOADING_SCROLL_DURATION - .5});
         }
     };
 

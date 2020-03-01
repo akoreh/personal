@@ -58,7 +58,7 @@ $topBorderHeight: 1.8rem;
     .dragHandle {
         width: 100%;
         height: $topBorderHeight;
-        margin-top: -$topBorderHeight - 0.1rem;
+        margin-top: -$topBorderHeight;
     }
 
     .buttons {
