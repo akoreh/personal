@@ -2,7 +2,8 @@
 @import '../../scss/mixins';
 
 $borderColor: $purple;
-$sideBorder: .4rem solid $borderColor;
+$borderWidth: .4rem;
+$sideBorder: $borderWidth solid $borderColor;
 
 .window {
     @include z-elevation-2;
@@ -11,10 +12,7 @@ $sideBorder: .4rem solid $borderColor;
     background: $white;
     border-left: $sideBorder;
     border-right: $sideBorder;
-    border-top: $windowToolbarHeight solid $borderColor;
     border-bottom: $sideBorder;
-    border-top-left-radius: .5rem;
-    border-top-right-radius: .5rem;
     transition: width, height, box-shadow .4s cubic-bezier(.75,-0.5,0,1.75);
     transform-origin: center;
 
@@ -44,27 +42,36 @@ $sideBorder: .4rem solid $borderColor;
         background: none;
         border-radius: 20px;
         
-        .buttons {
-            margin-left: 1rem;
-        }
-
         .content > * {
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
         }
     }
 
+    &:not(.app) {
+        .dragHandle {
+            width: calc(100% + #{$borderWidth * 2});
+            left: -$borderWidth;
+        }
+    }
+
+
+
+    
     .dragHandle {
         position: absolute;
         width: 100%;
         height: $windowToolbarHeight;
         top: -$windowToolbarHeight;
+        background-color: $borderColor;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
     }
 
     .buttons {
         position: fixed;
         top: -$windowToolbarHeight / 1.4;
-        margin-left: .2rem;
+        margin-left: .7rem;
     }
 
     .content {

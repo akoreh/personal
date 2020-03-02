@@ -8,7 +8,7 @@ import cls from './Folder.module.scss';
 
 const EmptyFolderContent = () => (
     <div className={cls.emptyFolderContent}>
-        <p>This folder is empty</p>
+        <p className={cls.message}>This folder is empty</p>
     </div>
 );
 
