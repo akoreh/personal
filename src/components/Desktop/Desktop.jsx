@@ -10,7 +10,7 @@ import cls from './Desktop.module.scss';
 
 const Desktop = () => {
     return <div className={cls.desktop} style={{paddingTop: '5rem'}}>
-        <ParallaxBackground layers={backgrounds[0].layers}/>
+        <ParallaxBackground layers={backgrounds.parallax.firewatch1.layers}/>
         <DesktopIcons />
         <DesktopWindows />
     </div>;

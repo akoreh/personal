@@ -2,8 +2,8 @@ import React from 'react';
 
 import cls from './ParallaxLayer.module.scss';
 
-const ParallaxLayer = ({src, zTranslate, scale}) => (
-    <div className={cls.parallaxLayer} style={{transform: `translateZ(${zTranslate}px) scale(${scale})`}}>
+const ParallaxLayer = ({src, style}) => (
+    <div className={cls.parallaxLayer} style={style}>
         <img src={src} alt="parallax layer"/>
     </div>
 );

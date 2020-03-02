@@ -30,15 +30,10 @@ const ParallaxBackground = ({layers}) => {
 
     return <div className={cls.parallaxBackground}>
         <div className={cls.parallax} ref={parallaxRef}>
-            {layers.map((src, index) => {
-                const x = (layers.length - 1 - index) / 2;
-                return <ParallaxLayer 
-                    key={src}
-                    src={src}
-                    zTranslate={-100 * x}
-                    scale={x + 1}
-                />;
-            })}
+            {layers.map(layer => <ParallaxLayer 
+                key={layer.src}
+                {...layer}
+            />)}
             <div className={cls.cover}/>
         </div>
     </div>;
