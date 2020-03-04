@@ -1,0 +1,4 @@
+
+Todo:
+  ☐ Folder icons on desktop are above first parallax background layer
+  ☐ Already open windows should not dispatch OpenWindowAndSetFocused action
