@@ -1,5 +1,5 @@
 import BrowserActionTypes from './browser.types';
-import { openTab, closeTab } from './browser.util';
+import { openTab, closeTab, setTabActive } from './browser.util';
 
 const initialState = {
     openTabs: [],
@@ -16,6 +16,11 @@ const browserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 openTabs: closeTab(state.openTabs, action.payload),
+            };
+        case BrowserActionTypes.SET_TAB_ACTIVE:
+            return {
+                ...state,
+                openTabs: setTabActive(state.openTabs, action.payload),
             };
         default:
             return state;

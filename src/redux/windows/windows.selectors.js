@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { find, filter } from 'lodash';
 
-const selectWindows = state => state.windows;
+export const selectWindows = state => state.windows;
 
 export const selectOpenWindows = createSelector(
     [selectWindows],

@@ -25,7 +25,12 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
             id: 'uiuxfolder',
             label: 'UI/UX',
             className: cls.folderIcon,
-            onClick: openTab.bind(null, {}),
+            onClick: openTab.bind(null, {
+                title: 'UI/UX',
+                content: <div>
+                    <h1>UI UX</h1>
+                </div>,
+            }),
         },
     ];
 
