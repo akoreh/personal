@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import Icon from '../Icons/Icon';
 
 import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
-import { openTab } from '../../redux/browser/browser.actions';
 import { appOpts as folderAppOpts, folderIcon} from '../../apps/Folder/Folder';
-
-import BrowserIcon from '../../assets/img/icons/browser.svg';
 
 import cls from './DesktopIcons.module.scss';
 
@@ -25,7 +22,7 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
             id: 'uiuxfolder',
             label: 'UI/UX',
             className: cls.folderIcon,
-            onClick: openTab.bind(null, {}),
+            onClick: openFolder,
         },
     ];
 
@@ -42,7 +39,6 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
 
 const mapDispatchToProps = dispatch => ({
     openWindowAndSetFocused: appOpts => dispatch(openWindowAndSetFocused(appOpts)),
-    openTab: tabOptions => dispatch(openTab(tabOptions)),
 });
 
 export default connect(null, mapDispatchToProps)(DesktopIcons);

@@ -27,7 +27,7 @@ export const closeTab = id => ({
     payload: id
 });
 
-export const setTabFocused = id => ({
-    type: BrowserActionTypes.SET_TAB_FOCUSED,
+export const setTabActive = id => ({
+    type: BrowserActionTypes.SET_TAB_ACTIVE,
     payload: id
 });

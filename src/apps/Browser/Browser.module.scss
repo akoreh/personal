@@ -8,30 +8,21 @@ $tabBarHeight: $windowToolbarHeight;
     background: $black;
 
     .tabs {
-
-        @include box-size(auto, $tabBarHeight);
+        @include box-size(auto, $tabBarHeight - 2px);
         @include flex();
         position: absolute;
         top: -$tabBarHeight + 2px;
         left: 6rem;
+    }
 
-        .tab {
-            position: relative;
-            background-color: $purple;
-            padding: 0 2rem;
-            transition: .5s all;
+    .viewport {
+        @include box-size(100%, 100%);
+        @include flex();
+        padding: .5rem;
+        background-color: $white;
 
-            &:hover,
-            &.active {
-                background: $darkPurple;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-            }
-
-            .tabLabel {
-                color: $white;
-                font-size: .8rem;
-            }
+        & > * {
+            color: $black;
         }
     }
 }

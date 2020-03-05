@@ -1,9 +1,10 @@
-$desktopIconSize: 3rem;
+@import '../../scss/variables';
+@import '../../scss/mixins';
 
 .desktopIcons {
-    display: flex;
-    flex-direction: column;
+    @include flex(auto, auto, column);
     margin-right: 2rem;
+    color: $white;
 
     & > :not(:last-child) {
         margin-bottom: 2rem;

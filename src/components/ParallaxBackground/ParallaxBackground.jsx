@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, createRef } from 'react';
 import { TweenMax } from 'gsap';
 
