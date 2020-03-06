@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
@@ -14,11 +14,12 @@ import settingsAnimationData from '../../assets/anim/settings.json';
 
 import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
 import { appOpts as browserAppOpts } from '../../apps/Browser/Browser';
+import { appOpts as settingsAppOpts } from '../../apps/Settings/Settings';
 
-import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
+import { openWindowAndSetFocused, openWindow } from '../../redux/windows/windows.actions';
 import { selectOpenApps, selectOpenFolders } from '../../redux/windows/windows.selectors';
 
-import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
+import { IS_DEV, EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
 
 import { C } from '../../util';
 
@@ -70,7 +71,8 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
             autoplay: false,
             speed: 1,
             playOnHover: true,
-            onClick: () => {},
+            appOpts: settingsAppOpts,
+            onClick: onAppIconClick,
         },
     ];
 
@@ -89,6 +91,12 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
 
         return find(openApps, {id: appId});
     }
+
+    useEffect(() => {
+        if (IS_DEV) {
+            openWindowAndSetFocused(settingsAppOpts);
+        }
+    }, []);
 
     return <Fragment>
         {icons.map(icon => {

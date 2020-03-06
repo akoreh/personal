@@ -13,6 +13,7 @@ import cls from './Window.module.scss';
 
 const Window = ({ 
     id, 
+    title,
     type, 
     width,
     height,
@@ -72,11 +73,13 @@ const Window = ({
             handle={<div id={resizeHandleId} className={cls.resizeHandle}></div>}
             width={widthNum}
             height={heightNum}
-            minConstraints={[150, 85]}
+            minConstraints={[450, 300]}
             onClick={setFocused}
             onResize={onResize}
         >
-            <div id={dragHandleId} className={cls.dragHandle}/>
+            <div id={dragHandleId} className={cls.dragHandle}>
+                {!isMaximized && <p className={cls.title}>{title}</p>}
+            </div>
             {!isMaximized && (
                 <div className={cls.buttons}>
                     <WindowButtons onClose={closeWindow.bind(null, id)} onMaximize={toggleWindowMaximized.bind(null, id)}/>

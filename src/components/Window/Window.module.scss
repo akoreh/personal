@@ -7,14 +7,12 @@ $sideBorder: $borderWidth solid $borderColor;
 
 .window {
     @include z-elevation-2;
-
     position: absolute;
     background: $white;
     border-left: $sideBorder;
     border-right: $sideBorder;
     border-bottom: $sideBorder;
-    transition: width, height, box-shadow .4s cubic-bezier(.75,-0.5,0,1.75);
-    transform-origin: center;
+    transition: box-shadow .2s cubic-bezier(.75,-0.5,0,1.75);
 
     &.maximized {
         @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
@@ -45,6 +43,10 @@ $sideBorder: $borderWidth solid $borderColor;
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
         }
+
+        .buttons {
+            margin-left: .5rem;
+        }
     }
 
     &:not(.app) {
@@ -57,6 +59,7 @@ $sideBorder: $borderWidth solid $borderColor;
 
     .dragHandle {
         @include box-size(100%, $windowToolbarHeight);
+        @include flex(center, center);
         position: absolute;
         top: -$windowToolbarHeight;
         background-color: $borderColor;
@@ -82,7 +85,11 @@ $sideBorder: $borderWidth solid $borderColor;
     .buttons {
         position: fixed;
         top: -$windowToolbarHeight / 1.4;
-        margin-left: .7rem;
+        margin-left: .1rem;
+    }
+
+    .title {
+        color: $white;
     }
 
     .content {
