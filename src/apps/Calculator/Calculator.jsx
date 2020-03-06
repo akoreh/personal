@@ -28,10 +28,8 @@ export const appOpts = {
     content: <AppCalculator />,
     type: 'app',
     title: 'Calculator',
-    style: {
-        width: '20%',
-        height: '50%',
-    }
+    width: '20%',
+    height: '50%',
 };
 
 export default AppCalculator;

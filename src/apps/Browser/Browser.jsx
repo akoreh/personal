@@ -78,10 +78,8 @@ export const appOpts = {
     content: <ConnectedBrowser />,
     type: 'app',
     title: 'Internet',
-    style: {
-        width: '70%',
-        height: '80%',
-    }
+    width: '70%',
+    height: '80%',
 };
 
 export default ConnectedBrowser;

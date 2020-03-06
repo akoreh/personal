@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Icon from '../Icons/Icon';
@@ -31,10 +31,6 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
 
         openWindowAndSetFocused({id, title, ...folderAppOpts});
     }
-
-    useEffect(() => {
-        openWindowAndSetFocused({id: 'uiuxfolder', title: 'UI/UX', ...folderAppOpts});
-    }, [])
 
     return <div className={cls.desktopIcons}>
         {icons.map(icon => <Icon key={icon.id} {...icon} />)}
