@@ -7,7 +7,7 @@ import WindowButtons from '../WindowButtons/WindowButtons';
 
 import { closeWindow, toggleWindowMaximized, setWindowFocused, updateWindowDimensions } from '../../redux/windows/windows.actions';
 
-import { C } from '../../util';
+import { C, getRandomInt } from '../../util';
 
 import cls from './Window.module.scss';
 
@@ -29,7 +29,7 @@ const Window = ({
     const resizeHandleId = `window_resize_Handle-${id}`;
     const widthNum = calculateDimension(width, window.innerWidth);
     const heightNum = calculateDimension(height, window.innerHeight);
-    const centerX  = window.innerWidth / 2 - widthNum / 2;
+    const centerX  = (window.innerWidth / 2 - widthNum / 2) + getRandomInt(-50, 150);
 
     /**
      * Converts dimension values like '50%' or '50vh' to actual pixel value
@@ -61,7 +61,7 @@ const Window = ({
         updateWindowDimensions(id, size.width, size.height);
     };
 
-    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: 0}} onStart={setFocused}>
+    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: getRandomInt(0, 150)}} onStart={setFocused}>
         <ResizableBox
             className={C(
                 cls.window, 
