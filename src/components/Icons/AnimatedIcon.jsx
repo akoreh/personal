@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import lottie from 'lottie-web';
 
 const AnimatedIcon = ({
@@ -12,28 +12,35 @@ const AnimatedIcon = ({
     ...props 
 }) => {
     const base = createRef();
-    let animation;
+    const [animation, setAnimation] = useState();
 
-    function initAnimation () {
-        animation = lottie.loadAnimation({
+    function loadAnimation() {
+        setAnimation(lottie.loadAnimation({
             container: base.current,
             ...props,
             autoplay: false,
-        });
+        }));
+    }
+
+    function initAnimation () {
+        if (!animation) {
+            return;
+        }
 
         animation.setSpeed(speed);
 
         if (autoplay) {
             setTimeout(playAnimation, startDelay * 1000);
         }
-    };
+    }
 
     function playAnimation(direction = 1) {
         animation.setDirection(direction);
         animation.play();
     }
 
-    useEffect(initAnimation, []);
+    useEffect(loadAnimation, []);
+    useEffect(initAnimation, [animation]);
 
     return <div 
         id={`lottie_${key}`} 

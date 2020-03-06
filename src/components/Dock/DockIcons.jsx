@@ -66,9 +66,10 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
             key: 'dockSettings',
             className: C(cls.icon, cls.settingsIcon),
             animationData: settingsAnimationData,
-            loop: true,
-            autoplay: true,
-            speed: 0.3,
+            loop: false,
+            autoplay: false,
+            speed: 1,
+            playOnHover: true,
             onClick: () => {},
         },
     ];

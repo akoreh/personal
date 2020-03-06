@@ -9,14 +9,15 @@ import wifiAnimationData from '../../assets/anim/wifi.json';
 import cls from './TopBarIcons.module.scss';
 
 const icons = [
-    {
-        key: 'wifiIndicator',
-        className: cls.wifiIndicator,
-        animationData: wifiAnimationData,
-        loop: true,
-        autoplay: true,
-        speed: 0.5,
-    },
+    // {
+    //     key: 'wifiIndicator',
+    //     className: cls.wifiIndicator,
+    //     animationData: wifiAnimationData,
+    //     loop: false,
+    //     autoplay: false,
+    //     speed: 0.5,
+    //     playOnHover: true,
+    // },
     {
         key: 'batteryIndicator',
         animationData: batteryAnimationData,
