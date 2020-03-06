@@ -54,10 +54,8 @@ $sideBorder: $borderWidth solid $borderColor;
             left: -$borderWidth;
         }
     }
-
-
-
     
+
     .dragHandle {
         position: absolute;
         width: 100%;
@@ -66,6 +64,8 @@ $sideBorder: $borderWidth solid $borderColor;
         background-color: $borderColor;
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
+        border: 2px solid $darkPurple;
+        border-bottom: none;
     }
 
     .buttons {

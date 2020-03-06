@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
@@ -88,10 +88,6 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
 
         return find(openApps, {id: appId});
     }
-
-    useEffect(() => {
-        openWindowAndSetFocused(browserAppOpts);
-    }, []);
 
     return <Fragment>
         {icons.map(icon => {
