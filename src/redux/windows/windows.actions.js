@@ -26,3 +26,8 @@ export const openWindowAndSetFocused = appOpts => {
         dispatch(setWindowFocused(appOpts.id));
     };
 };
+
+export const updateWindowDimensions = (id, width, height) => ({
+    type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
+    payload: {id, width, height},
+});

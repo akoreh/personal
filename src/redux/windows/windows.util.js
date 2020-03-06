@@ -1,12 +1,10 @@
-import { filter, map, find } from 'lodash';
+import { filter, map, find, findIndex } from 'lodash';
 
 const DEFAULT_OPTS = {
     type: 'folder', //folder / app
     isMaximized: false,
-    style: {
-        width: '50%',
-        height: '60%',
-    },
+    width: '50%',
+    height: '60%',
 };
 
 export const openWindow = (openWindows, appOpts) => {
@@ -30,6 +28,15 @@ export const setWindowFocused = (openWindows, id) => map(openWindows, openWindow
     ...openWindow,
     isFocused: openWindow.id === id ? true : false,
 }));
+
+export const updateWindowDimensions = (openWindows, {id, width, height}) => {
+    const windows = [...openWindows];
+    const windowIndex = findIndex(windows, window => window.id === id);
+
+    windows[windowIndex] = {...windows[windowIndex], width, height};
+
+    return windows;
+}
 
 const createNewWindow = (appOpts) => ({
     ...DEFAULT_OPTS,

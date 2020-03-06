@@ -17,8 +17,7 @@ $sideBorder: $borderWidth solid $borderColor;
     transform-origin: center;
 
     &.maximized {
-        width: 100% !important;
-        height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important;
+        @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
         transform: none !important;
         top: $topBarHeight;
         left: 0;
@@ -50,22 +49,34 @@ $sideBorder: $borderWidth solid $borderColor;
 
     &:not(.app) {
         .dragHandle {
-            width: calc(100% + #{$borderWidth * 2});
+            @include box-size(calc(100% + #{$borderWidth * 2}), $windowToolbarHeight);
             left: -$borderWidth;
         }
     }
     
 
     .dragHandle {
+        @include box-size(100%, $windowToolbarHeight);
         position: absolute;
-        width: 100%;
-        height: $windowToolbarHeight;
         top: -$windowToolbarHeight;
         background-color: $borderColor;
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
         border: 2px solid $darkPurple;
         border-bottom: none;
+    }
+
+    .resizeHandle {
+        @include box-size(20px, 20px);
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGF");
+        background-position: bottom right;
+        padding: 0 3px 3px 0;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        cursor: se-resize;
     }
 
     .buttons {
