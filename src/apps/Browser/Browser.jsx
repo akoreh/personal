@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -7,33 +8,36 @@ import { tabOptions as homePageTabOptions} from './Pages/Home/HomePage';
 
 import { selectOpenTabs, selectActiveTab } from '../../redux/browser/browser.selectors';
 import { openTab, closeTab, setTabActive } from '../../redux/browser/browser.actions';
-
-import { C } from '../../util';
+import { closeWindow } from '../../redux/windows/windows.actions';
 
 import cls from './Browser.module.scss';
 import Tab from './Tab';
 
-const AppBrowser = ({ openTabs, activeTab, openTab, closeTab, setTabActive }) => {
+const APP_ID = 'browser';
+
+const AppBrowser = ({ openTabs, activeTab, openTab, closeTab, setTabActive, closeWindow }) => {
     useEffect(() => {
         if (!openTabs.length) {
-            openTab({...homePageTabOptions});
+            openHomePageTab();
         }
     }, []);
 
-    function onTabClose(tabId) {
-        if (openTabs.length === 1) {
-            //if we close the only open tab close the browser aswell
-            closeTab(tabId);
-            return;
-        }
-        
-        const closedTabIndex = findIndex(openTabs, {id: tabId});
-        
-        if (openTabs[closedTabIndex + 1]) {
-            //focus next tab
-        } else {
-            //focused the previous tab
+    function openHomePageTab() {
+        openTab({...homePageTabOptions});
+    }
 
+    function onTabClose(tabId) {
+        closeTab(tabId);
+
+        if (openTabs.length > 1) {
+            const closedTabIndex = findIndex(openTabs, {id: tabId});
+            const nextTab = openTabs[closedTabIndex + 1];
+            const previousTab = openTabs[closedTabIndex - 1];
+
+            nextTab ? setTabActive(nextTab.id) : setTabActive(previousTab.id);
+        } else {
+            //if we close the only open tab close the browser aswell
+            closeWindow(APP_ID);
         }
     }
 
@@ -64,12 +68,13 @@ const mapDispatchToProps = dispatch => ({
     openTab: tabOptions => dispatch(openTab(tabOptions)),
     closeTab: id => dispatch(closeTab(id)),
     setTabActive: id => dispatch(setTabActive(id)),
+    closeWindow: id => dispatch(closeWindow(id)),
 });
 
 const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(AppBrowser);
 
 export const appOpts = {
-    id: 'browser',
+    id: APP_ID,
     content: <ConnectedBrowser />,
     type: 'app',
     title: 'Internet',

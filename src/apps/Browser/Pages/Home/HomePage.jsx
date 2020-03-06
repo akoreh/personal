@@ -4,7 +4,7 @@ import cls from './HomePage.module.scss';
 
 const HomePage = () => {
     return <div className={cls.homePage}>
-        <h1>Google</h1>
+        <h1>Groogle</h1>
         <input type="text"/>
     </div>;
 };

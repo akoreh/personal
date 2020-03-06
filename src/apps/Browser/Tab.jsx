@@ -19,7 +19,10 @@ const Tab = ({ tab, isActive, onClick, onClose }) => {
             icon={isCloseHovered ? faTimesCircle : faTimes}
             onMouseEnter={setIsCloseHovered.bind(null, true)}
             onMouseLeave={setIsCloseHovered.bind(null, false)}
-            onClick={onClose}
+            onClick={(evt) => {
+                evt.stopPropagation(); 
+                onClose();
+            }}
         />
     </div>
 };
