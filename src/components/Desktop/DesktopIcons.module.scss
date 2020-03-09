@@ -3,7 +3,8 @@
 
 .desktopIcons {
     @include flex(auto, auto, column);
-    margin-right: 2rem;
+    position: absolute;
+    right: 2rem;
     color: $white;
 
     & > :not(:last-child) {

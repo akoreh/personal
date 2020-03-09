@@ -3,8 +3,10 @@ import { TimelineMax, TweenMax } from 'gsap';
 
 import TopBar from './components/TopBar/TopBar';
 import Desktop from './components/Desktop/Desktop';
+import ParallaxBackground from './components/ParallaxBackground/ParallaxBackground';
 import Dock from './components/Dock/Dock';
 
+import backgrounds from './backgrounds.js';
 import { IS_DEV, L_S_TIME, L_S_FADE_DURATION, LOADING_SCROLL_DURATION} from './constants';
 
 import cls from './App.module.scss';
@@ -32,6 +34,7 @@ function App() {
   return <div className={cls.app}>
     <TopBar />
     <Desktop />
+    <ParallaxBackground layers={backgrounds.parallax.firewatch1.layers}/>
     <div className={cls.dock}>
       <Dock />
     </div>

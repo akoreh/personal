@@ -100,8 +100,8 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
 
     return <Fragment>
         {icons.map(icon => {
-            return <div className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
-                <Icon key={icon.key} {...icon} />
+            return <div key={icon.key} className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
+                <Icon {...icon} />
             </div>
         })}
     </Fragment>

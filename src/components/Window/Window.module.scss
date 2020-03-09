@@ -13,6 +13,7 @@ $sideBorder: $borderWidth solid $borderColor;
     border-right: $sideBorder;
     border-bottom: $sideBorder;
     transition: box-shadow .2s cubic-bezier(.75,-0.5,0,1.75);
+    z-index: $windowZIndex;
 
     &.maximized {
         @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);

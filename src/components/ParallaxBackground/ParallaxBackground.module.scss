@@ -1,12 +1,15 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
 .parallaxBackground {
-    height: 100%;
-    width: 100%;
+    @include box-size(100%, 100%);
     overflow: hidden;
+    pointer-events: none;
 }
 
 .parallax {
+    @include box-size(auto, 100%);
     perspective: 100px;
-    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     position: absolute;
@@ -21,12 +24,12 @@
 }
 
 .cover {
+    @include box-size(auto, 2000px);
     background: #2D112B;
     display: block;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    height: 2000px;
-    z-index: 2;
+    z-index: $desktopZIndex;
 }
