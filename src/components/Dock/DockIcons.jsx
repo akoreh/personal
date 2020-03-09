@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
@@ -15,11 +15,12 @@ import settingsAnimationData from '../../assets/anim/settings.json';
 import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
 import { appOpts as browserAppOpts } from '../../apps/Browser/Browser';
 import { appOpts as settingsAppOpts } from '../../apps/Settings/Settings';
+import { folderIcon } from '../../apps/Folder/Folder';
 
-import { openWindowAndSetFocused, openWindow } from '../../redux/windows/windows.actions';
+import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
 import { selectOpenApps, selectOpenFolders } from '../../redux/windows/windows.selectors';
 
-import { IS_DEV, EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
+import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
 
 import { C } from '../../util';
 
@@ -92,18 +93,26 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
         return find(openApps, {id: appId});
     }
 
-    useEffect(() => {
-        if (IS_DEV) {
-            openWindowAndSetFocused(settingsAppOpts);
-        }
-    }, []);
-
     return <Fragment>
-        {icons.map(icon => {
-            return <div key={icon.key} className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
-                <Icon {...icon} />
-            </div>
-        })}
+        {
+            icons.map(icon => {
+                return <div key={icon.key} className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
+                    <Icon {...icon} />
+                </div>
+            })
+        }
+        {
+            openFolders.length > 0 && <div className={cls.foldersSeparator}/>
+        }
+        {
+            openFolders.map((folder) => <div className={cls.dockIcon}>
+                <Icon 
+                    key={folder.id} 
+                    className={C(cls.icon, cls.folderIcon)} 
+                    {...{...folderIcon, autoplay: true, loop: false, playOnHover: false}}
+                />
+            </div>)
+        }
     </Fragment>
 };
 

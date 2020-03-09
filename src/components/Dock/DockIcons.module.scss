@@ -38,12 +38,24 @@ $iconSize: 2.5rem;
         transition: all 0.3s;
     }
 }
+
 .browserIcon {
-    height: 2.2rem;
+    @include box-size(auto, 2.2rem);
 }
 
 .settingsIcon {
-    width: 40px;
+    @include box-size(40px, auto);
     transform: scale(1.2);
     margin-top: .5rem;
+}
+
+.folderIcon {
+    @include box-size(3rem, 4rem);
+}
+
+.foldersSeparator {
+    @include box-size(1px, 80%);
+    background-color: $white;
+    margin-left: 1rem;
+    margin-right: 1.5rem !important;
 }
