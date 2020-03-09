@@ -19,6 +19,11 @@ export const openWindow = (openWindows, appOpts) => {
 
 export const closeWindow = (openWindows, id) => filter(openWindows, openWindow => openWindow.id !== id);
 
+export const toggleWindowMinimized = (openWindows, id) => map(openWindows, openWindow => ({
+    ...openWindow,
+    isMinimized: openWindow.id === id ? !openWindow.isMinimized : openWindow.isMinimized,
+}));
+
 export const toggleWindowZoom = (openWindows, id) => map(openWindows, openWindow => ({
     ...openWindow,
     isZoomed: openWindow.id === id ? !openWindow.isZoomed : false,

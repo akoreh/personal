@@ -18,7 +18,7 @@ export const selectOpenFolders = createSelector(
     openWindows => filter(openWindows, {type: 'folder'})
 );
 
-export const selectMaximizedWindow = createSelector(
+export const selectZoomedWindow = createSelector(
     [selectOpenWindows],
-    openWindows => find(openWindows, 'isZoomed')
+    openWindows => find(openWindows, openWindow => openWindow.isZoomed && !openWindow.isMinimized)
 );

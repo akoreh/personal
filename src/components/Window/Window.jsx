@@ -5,7 +5,13 @@ import { ResizableBox } from 'react-resizable';
 
 import WindowButtons from '../WindowButtons/WindowButtons';
 
-import { closeWindow, toggleWindowZoom, setWindowFocused, updateWindowDimensions } from '../../redux/windows/windows.actions';
+import { 
+    closeWindow,
+    toggleWindowMinimized,
+    toggleWindowZoom, 
+    setWindowFocused, 
+    updateWindowDimensions
+} from '../../redux/windows/windows.actions';
 
 import { C, getRandomInt } from '../../util';
 
@@ -17,11 +23,13 @@ const Window = ({
     type, 
     width,
     height,
-    children, 
+    children,
+    isMinimized,
     isZoomed, 
     isFocused,
     //METHODS
-    closeWindow, 
+    closeWindow,
+    minimizeWindow,
     toggleWindowZoom, 
     setWindowFocused,
     updateWindowDimensions,
@@ -61,13 +69,16 @@ const Window = ({
     function onResize(_, { size }) {
         updateWindowDimensions(id, size.width, size.height);
     };
-
+    
     return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: getRandomInt(0, 150)}} onStart={setFocused}>
         <ResizableBox
+            id={`window_${id}`}
             className={C(
-                cls.window, 
-                isZoomed && cls.maximized, type === 'app' && cls.app,
+                cls.window,
+                isMinimized && cls.minimized,
+                isZoomed && cls.zoomed, 
                 isFocused && cls.focused,
+                type === 'app' && cls.app,
             )}
             style={{width, height}}
             handle={<div id={resizeHandleId} className={cls.resizeHandle}></div>}
@@ -82,7 +93,11 @@ const Window = ({
             </div>
             {!isZoomed && (
                 <div className={cls.buttons}>
-                    <WindowButtons onClose={closeWindow.bind(null, id)} onToggleZoom={toggleWindowZoom.bind(null, id)}/>
+                    <WindowButtons 
+                        onClose={closeWindow.bind(null, id)}
+                        onMinimize={minimizeWindow.bind(null, id)}
+                        onToggleZoom={toggleWindowZoom.bind(null, id)}
+                    />
                 </div>
             )}
             <div className={cls.content}>
@@ -94,6 +109,7 @@ const Window = ({
 
 const mapDispatchToProps = dispatch => ({
     closeWindow: id => dispatch(closeWindow(id)),
+    minimizeWindow: id => dispatch(toggleWindowMinimized(id)),
     toggleWindowZoom: id => dispatch(toggleWindowZoom(id)),
     setWindowFocused: id => dispatch(setWindowFocused(id)),
     updateWindowDimensions: (id, width, height) => dispatch(updateWindowDimensions(id, width, height)),

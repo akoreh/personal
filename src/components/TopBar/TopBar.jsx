@@ -10,12 +10,12 @@ import WindowButtons from '../WindowButtons/WindowButtons';
 
 import { C } from '../../util';
 import { IS_DEV, L_S_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
-import { selectMaximizedWindow } from '../../redux/windows/windows.selectors';
-import { closeWindow, toggleWindowZoom } from '../../redux/windows/windows.actions';
+import { selectZoomedWindow } from '../../redux/windows/windows.selectors';
+import { closeWindow, toggleWindowZoom, toggleWindowMinimized } from '../../redux/windows/windows.actions';
 
 import cls from './TopBar.module.scss';
 
-const TopBar = ({ maximizedWindow, closeWindow, toggleWindowZoom}) => {
+const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) => {
     const topBarRef = createRef();
     const [systemTime, setSystemTime] = useState(new Date());
 
@@ -48,14 +48,15 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowZoom}) => {
 
     return <nav className={cls.topBar} ref={topBarRef}>
         <div className={cls.left}>
-            {maximizedWindow && (
+            {zoomedWindow && (
                 <WindowButtons 
-                    onClose={closeWindow.bind(null, maximizedWindow.id)}
-                    onToggleZoom={toggleWindowZoom.bind(null, maximizedWindow.id)}
+                    onClose={closeWindow.bind(null, zoomedWindow.id)}
+                    onMinimize={minimizeWindow.bind(null, zoomedWindow.id)}
+                    onToggleZoom={toggleWindowZoom.bind(null, zoomedWindow.id)}
                 />
             )}
             <h1 className={cls.brand}>
-                {!maximizedWindow && 'Koreh'}
+                {!zoomedWindow && 'Koreh'}
             </h1>
         </div>
         <div className={cls.center}>
@@ -68,11 +69,12 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowZoom}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    maximizedWindow: selectMaximizedWindow,
+    zoomedWindow: selectZoomedWindow,
 });
 
 const mapDispatchToProps = dispatch => ({
     closeWindow: id => dispatch(closeWindow(id)),
+    minimizeWindow: id => dispatch(toggleWindowMinimized(id)),
     toggleWindowZoom: id => dispatch(toggleWindowZoom(id)),
 });
 

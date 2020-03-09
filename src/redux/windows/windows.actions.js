@@ -10,6 +10,11 @@ export const closeWindow = id => ({
     payload: id,
 });
 
+export const toggleWindowMinimized = id => ({
+    type: WindowActionTypes.TOGGLE_WINDOW_MINIMIZED,
+    payload: id,
+});
+
 export const toggleWindowZoom = id => ({
     type: WindowActionTypes.TOGGLE_WINDOW_ZOOM,
     payload: id,

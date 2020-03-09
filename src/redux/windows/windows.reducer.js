@@ -2,7 +2,8 @@ import WindowActionTypes from './windows.types';
 import {
      openWindow, 
      closeWindow, 
-     toggleWindowZoom, 
+     toggleWindowZoom,
+     toggleWindowMinimized,
      setWindowFocused, 
      updateWindowDimensions
 } from './windows.util';
@@ -22,6 +23,11 @@ const windowsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 openWindows: closeWindow(state.openWindows, action.payload),
+            };
+        case WindowActionTypes.TOGGLE_WINDOW_MINIMIZED:
+            return {
+                ...state,
+                openWindows: toggleWindowMinimized(state.openWindows, action.payload),
             };
         case WindowActionTypes.TOGGLE_WINDOW_ZOOM:
             return {

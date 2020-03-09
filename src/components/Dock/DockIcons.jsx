@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
+import { TimelineMax } from 'gsap';
 
 import Icon from '../Icons/Icon';
 
@@ -17,7 +18,7 @@ import { appOpts as browserAppOpts } from '../../apps/Browser/Browser';
 import { appOpts as settingsAppOpts } from '../../apps/Settings/Settings';
 import { folderIcon } from '../../apps/Folder/Folder';
 
-import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
+import { openWindowAndSetFocused, toggleWindowMinimized } from '../../redux/windows/windows.actions';
 import { selectOpenApps, selectOpenFolders } from '../../redux/windows/windows.selectors';
 
 import { EMAIL, LINKED_IN, GIT_HUB } from '../../constants';
@@ -26,7 +27,7 @@ import { C } from '../../util';
 
 import cls from './DockIcons.module.scss';
 
-const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
+const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWindow }) => {
     const icons = [
         {
             key: 'dockInternet',
@@ -82,7 +83,14 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
     }
 
     function onAppIconClick() {
-        openWindowAndSetFocused(this.appOpts);
+        const { id } = this.appOpts;
+        const isRunning = iconAppIsRunning(id);
+
+        if (!isRunning) {
+            openWindowAndSetFocused(this.appOpts);
+        } else {
+            maximizeWindow(id);
+        }
     }
 
     function iconAppIsRunning(appId) {
@@ -96,7 +104,8 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
     return <Fragment>
         {
             icons.map(icon => {
-                return <div key={icon.key} className={C(cls.dockIcon, iconAppIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}>
+                const isRunning =  iconAppIsRunning(get(icon, ['appOpts', 'id'])) 
+                return <div key={icon.key} className={C(cls.dockIcon, isRunning && cls.appRunning)}>
                     <Icon {...icon} />
                 </div>
             })
@@ -109,6 +118,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused }) => {
                 <Icon 
                     key={folder.id} 
                     className={C(cls.icon, cls.folderIcon)} 
+                    onClick={maximizeWindow.bind(null, folder.id)}
                     {...{...folderIcon, autoplay: true, loop: false, playOnHover: false}}
                 />
             </div>)
@@ -123,6 +133,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     openWindowAndSetFocused: windowOpts => dispatch(openWindowAndSetFocused(windowOpts)),
+    maximizeWindow: id => dispatch(toggleWindowMinimized(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DockIcons);
