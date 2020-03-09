@@ -10,8 +10,8 @@ export const closeWindow = id => ({
     payload: id,
 });
 
-export const toggleWindowMaximized = id => ({
-    type: WindowActionTypes.TOGGLE_WINDOW_MAXIMIZED,
+export const toggleWindowZoom = id => ({
+    type: WindowActionTypes.TOGGLE_WINDOW_ZOOM,
     payload: id,
 });
 

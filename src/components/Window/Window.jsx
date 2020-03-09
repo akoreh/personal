@@ -5,7 +5,7 @@ import { ResizableBox } from 'react-resizable';
 
 import WindowButtons from '../WindowButtons/WindowButtons';
 
-import { closeWindow, toggleWindowMaximized, setWindowFocused, updateWindowDimensions } from '../../redux/windows/windows.actions';
+import { closeWindow, toggleWindowZoom, setWindowFocused, updateWindowDimensions } from '../../redux/windows/windows.actions';
 
 import { C, getRandomInt } from '../../util';
 
@@ -18,11 +18,11 @@ const Window = ({
     width,
     height,
     children, 
-    isMaximized, 
+    isZoomed, 
     isFocused,
     //METHODS
     closeWindow, 
-    toggleWindowMaximized, 
+    toggleWindowZoom, 
     setWindowFocused,
     updateWindowDimensions,
 }) => {
@@ -66,7 +66,7 @@ const Window = ({
         <ResizableBox
             className={C(
                 cls.window, 
-                isMaximized && cls.maximized, type === 'app' && cls.app,
+                isZoomed && cls.maximized, type === 'app' && cls.app,
                 isFocused && cls.focused,
             )}
             style={{width, height}}
@@ -78,11 +78,11 @@ const Window = ({
             onResize={onResize}
         >
             <div id={dragHandleId} className={cls.dragHandle}>
-                {!isMaximized && <p className={cls.title}>{title}</p>}
+                {!isZoomed && <p className={cls.title}>{title}</p>}
             </div>
-            {!isMaximized && (
+            {!isZoomed && (
                 <div className={cls.buttons}>
-                    <WindowButtons onClose={closeWindow.bind(null, id)} onMaximize={toggleWindowMaximized.bind(null, id)}/>
+                    <WindowButtons onClose={closeWindow.bind(null, id)} onToggleZoom={toggleWindowZoom.bind(null, id)}/>
                 </div>
             )}
             <div className={cls.content}>
@@ -94,7 +94,7 @@ const Window = ({
 
 const mapDispatchToProps = dispatch => ({
     closeWindow: id => dispatch(closeWindow(id)),
-    toggleWindowMaximized: id => dispatch(toggleWindowMaximized(id)),
+    toggleWindowZoom: id => dispatch(toggleWindowZoom(id)),
     setWindowFocused: id => dispatch(setWindowFocused(id)),
     updateWindowDimensions: (id, width, height) => dispatch(updateWindowDimensions(id, width, height)),
 });

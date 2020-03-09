@@ -11,11 +11,11 @@ import WindowButtons from '../WindowButtons/WindowButtons';
 import { C } from '../../util';
 import { IS_DEV, L_S_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
 import { selectMaximizedWindow } from '../../redux/windows/windows.selectors';
-import { closeWindow, toggleWindowMaximized } from '../../redux/windows/windows.actions';
+import { closeWindow, toggleWindowZoom } from '../../redux/windows/windows.actions';
 
 import cls from './TopBar.module.scss';
 
-const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
+const TopBar = ({ maximizedWindow, closeWindow, toggleWindowZoom}) => {
     const topBarRef = createRef();
     const [systemTime, setSystemTime] = useState(new Date());
 
@@ -51,7 +51,7 @@ const TopBar = ({ maximizedWindow, closeWindow, toggleWindowMaximized}) => {
             {maximizedWindow && (
                 <WindowButtons 
                     onClose={closeWindow.bind(null, maximizedWindow.id)}
-                    onMaximize={toggleWindowMaximized.bind(null, maximizedWindow.id)}
+                    onToggleZoom={toggleWindowZoom.bind(null, maximizedWindow.id)}
                 />
             )}
             <h1 className={cls.brand}>
@@ -73,7 +73,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     closeWindow: id => dispatch(closeWindow(id)),
-    toggleWindowMaximized: id => dispatch(toggleWindowMaximized(id)),
+    toggleWindowZoom: id => dispatch(toggleWindowZoom(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar);

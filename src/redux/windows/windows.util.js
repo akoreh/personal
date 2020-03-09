@@ -2,7 +2,7 @@ import { filter, map, find, findIndex } from 'lodash';
 
 const DEFAULT_OPTS = {
     type: 'folder', //folder / app
-    isMaximized: false,
+    isZoomed: false,
     width: '50%',
     height: '60%',
 };
@@ -19,9 +19,9 @@ export const openWindow = (openWindows, appOpts) => {
 
 export const closeWindow = (openWindows, id) => filter(openWindows, openWindow => openWindow.id !== id);
 
-export const toggleWindowMaximized = (openWindows, id) => map(openWindows, openWindow => ({
+export const toggleWindowZoom = (openWindows, id) => map(openWindows, openWindow => ({
     ...openWindow,
-    isMaximized: openWindow.id === id ? !openWindow.isMaximized : false,
+    isZoomed: openWindow.id === id ? !openWindow.isZoomed : false,
 }));
 
 export const setWindowFocused = (openWindows, id) => map(openWindows, openWindow => ({
