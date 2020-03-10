@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { TweenMax } from 'gsap';
 import debounce from 'debounce';
 
@@ -10,8 +10,8 @@ import { IS_DEV, SCROLL_TO_TOP_DURATION, L_S_TIME, L_S_FADE_DURATION } from '../
 import cls from './ParallaxBackground.module.scss';
 
 const ParallaxBackground = ({layers}) => {
-    const parallaxContainerRef = createRef();
-    const parallaxRef = createRef();
+    const parallaxContainerRef = useRef();
+    const parallaxRef = useRef();
 
     const scrollToBottom = () => parallaxRef.current.scrollTo(0, parallaxRef.current.clientHeight);
 

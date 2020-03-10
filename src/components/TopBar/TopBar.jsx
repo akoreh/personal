@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { TweenMax, Expo } from 'gsap';
@@ -16,7 +16,7 @@ import { closeWindow, toggleWindowZoom, toggleWindowMinimized } from '../../redu
 import cls from './TopBar.module.scss';
 
 const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) => {
-    const topBarRef = createRef();
+    const topBarRef = useRef();
     const [systemTime, setSystemTime] = useState(new Date());
 
     function animateTopBar () {

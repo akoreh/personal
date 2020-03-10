@@ -32,9 +32,9 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
         openWindowAndSetFocused({id, title, ...folderAppOpts});
     }
 
-    useEffect(() => {
-        openWindowAndSetFocused({id: 'uiuxfolder', title: 'test', ...icons[0]});
-    }, []);
+    // useEffect(() => {
+    //     openWindowAndSetFocused({id: 'uiuxfolder', title: 'test', ...icons[0]});
+    // }, []);
 
     return <div className={cls.desktopIcons}>
         {icons.map(icon => <Icon key={icon.id} {...icon} />)}

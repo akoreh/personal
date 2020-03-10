@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
-import { TimelineMax } from 'gsap';
 
 import Icon from '../Icons/Icon';
 
@@ -45,6 +44,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
         },
         {
             key: 'dockEmail',
+            title: 'Email',
             className: cls.icon,
             src: EmailIcon,
             href: `mailto:${EMAIL}`,
@@ -53,6 +53,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
         },
         {
             key: 'dockGitHub',
+            title: 'GitHub',
             className: cls.icon,
             src: GitHubIcon,
             href: GIT_HUB,
@@ -60,6 +61,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
         },
         {
             key: 'dockLinkedIn',
+            title: 'LinkedIn',
             className: cls.icon,
             src: LinkedInIcon,
             href: LINKED_IN,
@@ -106,6 +108,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
             icons.map(icon => {
                 const isRunning =  iconAppIsRunning(get(icon, ['appOpts', 'id'])) 
                 return <div key={icon.key} className={C(cls.dockIcon, isRunning && cls.appRunning)}>
+                    <div className={cls.title}>{get(icon, ['appOpts', 'title'], icon.title)}</div>
                     <Icon {...icon} />
                 </div>
             })
@@ -114,9 +117,9 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
             openFolders.length > 0 && <div className={cls.foldersSeparator}/>
         }
         {
-            openFolders.map((folder) => <div className={cls.dockIcon}>
+            openFolders.map((folder) => <div key={folder.id} className={cls.dockIcon}>
+                <div className={cls.title}>{folder.title}</div>
                 <Icon 
-                    key={folder.id} 
                     className={C(cls.icon, cls.folderIcon)} 
                     onClick={maximizeWindow.bind(null, folder.id)}
                     {...{...folderIcon, autoplay: true, loop: false, playOnHover: false}}

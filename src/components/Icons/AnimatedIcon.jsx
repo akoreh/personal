@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import lottie from 'lottie-web';
 
 const AnimatedIcon = ({
@@ -11,7 +11,7 @@ const AnimatedIcon = ({
     style,
     ...props 
 }) => {
-    const base = createRef();
+    const base = useRef();
     const [animation, setAnimation] = useState();
 
     function loadAnimation() {

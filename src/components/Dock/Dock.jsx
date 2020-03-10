@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TweenLite, Expo } from 'gsap';
 
 import DockIcons from './DockIcons';
@@ -8,7 +8,7 @@ import { IS_DEV, LOADING_SCROLL_DURATION } from '../../constants';
 import cls from './Dock.module.scss';
 
 const Dock = () => {
-    const dockRef = createRef();
+    const dockRef = useRef();
 
     const animateDock = () => {
         const target = dockRef.current;

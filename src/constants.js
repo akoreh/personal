@@ -1,4 +1,4 @@
-export const IS_DEV = false;
+export const IS_DEV = true;
 
 //Social Stuff
 export const EMAIL = 'koreh.andrei20@gmail.com';
@@ -9,4 +9,4 @@ export const GIT_HUB = 'https://github.com/akoreh/';
 export const L_S_TIME =  2.2;
 export const L_S_FADE_DURATION = .6;
 export const SCROLL_TO_TOP_DURATION = 2.5;
-export const LOADING_SCROLL_DURATION = L_S_TIME + L_S_FADE_DURATION + SCROLL_TO_TOP_DURATION;
+export const LOADING_SCROLL_DURATION = IS_DEV ? 0 : L_S_TIME + L_S_FADE_DURATION + SCROLL_TO_TOP_DURATION;

@@ -7,9 +7,18 @@
     padding: 0 1rem;
 }
 
+.speaker {
+    margin-right: .5rem;
+}
+
 .wifiIndicator {
     @include box-size(2rem, auto);
     margin-right: 1rem;
+}
+
+.bluetoothIndicator {
+    @include box-size(4rem, auto);
+    margin-left: -2rem;
 }
 
 .batteryIndicator {
