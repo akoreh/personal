@@ -1,20 +1,15 @@
-.topBarIcons {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    flex: 1;
-    justify-content: flex-end;
-    padding: 0 1rem;
+@import '../../scss/mixins';
 
-    & >:not(:last-child) {
-        margin-right: .4rem;
-    }
+.topBarIcons {
+    @include box-size(auto, 100%);
+    @include flex(flex-end, center);
+    flex: 1;
+    padding: 0 1rem;
 }
 
 .wifiIndicator {
-    width: 2.5rem;
-    margin-left: -.6rem;
-    pointer-events: none;
+    @include box-size(2rem, auto);
+    margin-right: 1rem;
 }
 
 .batteryIndicator {

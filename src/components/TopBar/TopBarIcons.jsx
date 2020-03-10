@@ -6,18 +6,20 @@ import Icon from '../Icons/Icon';
 import batteryAnimationData from '../../assets/anim/battery.json';
 import wifiAnimationData from '../../assets/anim/wifi.json';
 
+import { LOADING_SCROLL_DURATION } from '../../constants'; 
+
 import cls from './TopBarIcons.module.scss';
 
 const icons = [
-    // {
-    //     key: 'wifiIndicator',
-    //     className: cls.wifiIndicator,
-    //     animationData: wifiAnimationData,
-    //     loop: false,
-    //     autoplay: false,
-    //     speed: 0.5,
-    //     playOnHover: true,
-    // },
+    {
+        key: 'wifiIndicator',
+        className: cls.wifiIndicator,
+        animationData: wifiAnimationData,
+        loop: false,
+        autoplay: true,
+        speed: 0.5,
+        startDelay: LOADING_SCROLL_DURATION,
+    },
     {
         key: 'batteryIndicator',
         animationData: batteryAnimationData,
@@ -25,7 +27,7 @@ const icons = [
         loop: true,
         autoplay: true,
         speed: 0.5,
-        startDelay: 10,
+        startDelay: LOADING_SCROLL_DURATION,
     },
 ];
 
