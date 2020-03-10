@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import Draggable from 'react-draggable';
+import { connect } from 'react-redux';
 import { ResizableBox } from 'react-resizable';
+import { TimelineLite, TweenLite } from 'gsap';
 
 import WindowButtons from '../WindowButtons/WindowButtons';
 
@@ -34,11 +35,13 @@ const Window = ({
     setWindowFocused,
     updateWindowDimensions,
 }) => {
-    const dragHandleId = `window__handle-${id}`;
-    const resizeHandleId = `window_resize_Handle-${id}`;
+    const windowId = `window_${id}`;
+    const dragHandleId = `${windowId}--dragHandle`;
+    const resizeHandleId = `${windowId}--resizeHandle`;
     const widthNum = calculateDimension(width, window.innerWidth);
     const heightNum = calculateDimension(height, window.innerHeight);
     const centerX  = (window.innerWidth / 2 - widthNum / 2) + getRandomInt(-50, 150);
+    const centerY = getRandomInt(0, 150);
 
     /**
      * Converts dimension values like '50%' or '50vh' to actual pixel value
@@ -69,10 +72,32 @@ const Window = ({
     function onResize(_, { size }) {
         updateWindowDimensions(id, size.width, size.height);
     };
+
+    function onClose(id) {
+        animateWindowClosing().then(() => {
+            closeWindow(id);
+        });
+    }
+
+    function animateWindowOpening() {
+        const windowElement = document.getElementById(windowId);
+        const timeline = new TimelineLite();
+
+        timeline.set(windowElement, {opacity: 1});
+        timeline.from(windowElement, 1, {y: '-100%', ease: "elastic.out(1.5, 1.5)"});
+    }
+
+    function animateWindowClosing() {
+        return new Promise(resolve => {
+            TweenLite.to(document.getElementById(windowId), .2, {y: -heightNum * 1.5}).eventCallback('onComplete', resolve);
+        });
+    }
+
+    useEffect(animateWindowOpening, []);
     
-    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: getRandomInt(0, 150)}} onStart={setFocused}>
+    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: centerY}} onStart={setFocused}>
         <ResizableBox
-            id={`window_${id}`}
+            id={windowId}
             className={C(
                 cls.window,
                 isMinimized && cls.minimized,
@@ -94,7 +119,7 @@ const Window = ({
             {!isZoomed && (
                 <div className={cls.buttons}>
                     <WindowButtons 
-                        onClose={closeWindow.bind(null, id)}
+                        onClose={onClose.bind(null, id)}
                         onMinimize={minimizeWindow.bind(null, id)}
                         onToggleZoom={toggleWindowZoom.bind(null, id)}
                     />

@@ -20,7 +20,7 @@ export const openTab = tabOptions => (dispatch, getState) => {
         type: BrowserActionTypes.OPEN_TAB,
         payload: tabOptions,
     });
-}
+};
 
 export const closeTab = id => ({
     type: BrowserActionTypes.CLOSE_TAB,

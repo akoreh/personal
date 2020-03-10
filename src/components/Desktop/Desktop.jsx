@@ -1,15 +1,15 @@
 import React from 'react';
 
-import DesktopIcons from './DesktopIcons';
 import DesktopWindows from './DesktopWindows';
+import DesktopIcons from './DesktopIcons';
 
 import cls from './Desktop.module.scss';
 
-const Desktop = () => {
-    return <div className={cls.desktop} style={{paddingTop: '5rem'}}>
-        <DesktopIcons />
+const Desktop = () => (
+    <div className={cls.desktop}>
         <DesktopWindows />
-    </div>;
-}
+        <DesktopIcons />
+    </div>
+);
 
 export default Desktop;

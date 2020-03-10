@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Icon from '../Icons/Icon';
@@ -8,7 +8,7 @@ import { appOpts as folderAppOpts, folderIcon} from '../../apps/Folder/Folder';
 
 import cls from './DesktopIcons.module.scss';
 
-const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
+const DesktopIcons = ({ openWindowAndSetFocused }) => {
     const icons = [
         {
             ...folderIcon,
@@ -31,10 +31,6 @@ const DesktopIcons = ({ openWindowAndSetFocused, openTab }) => {
 
         openWindowAndSetFocused({id, title, ...folderAppOpts});
     }
-
-    // useEffect(() => {
-    //     openWindowAndSetFocused({id: 'uiuxfolder', title: 'test', ...icons[0]});
-    // }, []);
 
     return <div className={cls.desktopIcons}>
         {icons.map(icon => <Icon key={icon.id} {...icon} />)}

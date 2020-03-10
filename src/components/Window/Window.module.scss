@@ -14,6 +14,9 @@ $sideBorder: $borderWidth solid $borderColor;
     border-bottom: $sideBorder;
     transition: box-shadow .2s cubic-bezier(.75,-0.5,0,1.75);
     z-index: $windowZIndex;
+    transform: translateY(-200%);
+    
+    opacity: 0;
 
     &.minimized {
         display: none;

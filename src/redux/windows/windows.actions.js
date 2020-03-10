@@ -1,3 +1,5 @@
+import { find } from 'lodash';
+
 import WindowActionTypes from './windows.types';
 
 export const openWindow = appOpts => ({
@@ -20,10 +22,24 @@ export const toggleWindowZoom = id => ({
     payload: id,
 });
 
-export const setWindowFocused = id => ({
-    type: WindowActionTypes.SET_WINDOW_FOCUSED,
-    payload: id,
+export const updateWindowDimensions = (id, width, height) => ({
+    type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
+    payload: {id, width, height},
 });
+
+export const setWindowFocused = id => (dispatch, getState) => {
+    const state = getState();
+    const window = find(state.windows.openWindows, { id: id });
+
+    if (window.isMinimized) {
+        dispatch(toggleWindowMinimized(id));
+    }
+
+    dispatch({
+        type: WindowActionTypes.SET_WINDOW_FOCUSED,
+        payload: id,
+    });
+}
 
 export const openWindowAndSetFocused = appOpts => {
     return dispatch => {
@@ -31,8 +47,3 @@ export const openWindowAndSetFocused = appOpts => {
         dispatch(setWindowFocused(appOpts.id));
     };
 };
-
-export const updateWindowDimensions = (id, width, height) => ({
-    type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
-    payload: {id, width, height},
-});
