@@ -42,11 +42,10 @@ const AnimatedIcon = ({
     useEffect(loadAnimation, []);
     useEffect(initAnimation, [animation]);
 
-    return <div 
-        id={`lottie_${key}`} 
+    return <div
+        ref={base}
         className={className} 
         style={style} 
-        ref={base}
         onMouseEnter={() => playOnHover && playAnimation()}
         onMouseLeave={() => playOnHover && playAnimation(-1)}
     />;

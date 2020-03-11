@@ -10,6 +10,7 @@ const Icon = props => (
         className={cls.icon} 
         style={{cursor: typeof props.onClick === 'function' ? 'pointer' : 'default'}} 
         onClick={() => props.onClick(props)}
+        
     >
         {
             props.animationData ? 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { find, get } from 'lodash';
@@ -26,105 +26,52 @@ import { C } from '../../util';
 
 import cls from './DockIcons.module.scss';
 
+const dockFolderIcon = {...folderIcon, autoplay: true, loop: false, playOnHover: false};
+
 const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWindow }) => {
-    const icons = [
-        {
-            key: 'dockInternet',
-            className: C(cls.icon, cls.browserIcon),
-            src: BrowserIcon,
-            appOpts: browserAppOpts,
-            onClick: onAppIconClick,
-        },
-        {
-            key: 'dockCalculator',
-            className: C(cls.icon, cls.calculatorIcon),
-            src: CalculatorIcon,
-            appOpts: calculatorAppOpts,
-            onClick: onAppIconClick,
-        },
-        {
-            key: 'dockEmail',
-            title: 'Email',
-            className: cls.icon,
-            src: EmailIcon,
-            href: `mailto:${EMAIL}`,
-            target: '_self',
-            onClick: onLinkClick,
-        },
-        {
-            key: 'dockGitHub',
-            title: 'GitHub',
-            className: cls.icon,
-            src: GitHubIcon,
-            href: GIT_HUB,
-            onClick: onLinkClick,
-        },
-        {
-            key: 'dockLinkedIn',
-            title: 'LinkedIn',
-            className: cls.icon,
-            src: LinkedInIcon,
-            href: LINKED_IN,
-            onClick: onLinkClick,
-        },
-        {
-            key: 'dockSettings',
-            className: C(cls.icon, cls.settingsIcon),
-            animationData: settingsAnimationData,
-            loop: false,
-            autoplay: false,
-            speed: 1,
-            playOnHover: true,
-            appOpts: settingsAppOpts,
-            onClick: onAppIconClick,
-        },
-    ];
+    const [icons, setIcons] = useState([]);
+
+    useEffect(() => setIcons(getIcons(onAppClick, onLinkClick)), []);
+
+
+    function appIsRunning(appId) {
+        return appId ? find(openApps, {id: appId}) : false;
+    }
+
+    function onAppClick() {
+        appIsRunning(this.appOpts.id) ? maximizeWindow(this.appOpts.id) : openWindowAndSetFocused(this.appOpts);
+    }
 
     function onLinkClick() {
         window.open(this.href, this.target)
     }
 
-    function onAppIconClick() {
-        const { id } = this.appOpts;
-        const isRunning = iconAppIsRunning(id);
-
-        if (!isRunning) {
-            openWindowAndSetFocused(this.appOpts);
-        } else {
-            maximizeWindow(id);
-        }
-    }
-
-    function iconAppIsRunning(appId) {
-        if(!appId) {
-            return false;
-        }
-
-        return find(openApps, {id: appId});
-    }
-
     return <Fragment>
         {
-            icons.map(icon => {
-                const isRunning =  iconAppIsRunning(get(icon, ['appOpts', 'id'])) 
-                return <div key={icon.key} className={C(cls.dockIcon, isRunning && cls.appRunning)}>
+            icons.map((icon, index) => (
+                <div 
+                    key={index} 
+                    className={C(cls.dockIcon, appIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}
+                >
                     <div className={cls.title}>{get(icon, ['appOpts', 'title'], icon.title)}</div>
                     <Icon {...icon} />
                 </div>
-            })
+            ))
         }
         {
-            openFolders.length > 0 && <div className={cls.foldersSeparator}/>
+            openFolders.length > 0 && <div className={cls.foldersSeparator} />
         }
         {
-            openFolders.map((folder) => <div key={folder.id} className={cls.dockIcon}>
-                <div className={cls.title}>{folder.title}</div>
-                <Icon 
-                    className={C(cls.icon, cls.folderIcon)} 
-                    onClick={maximizeWindow.bind(null, folder.id)}
-                    {...{...folderIcon, autoplay: true, loop: false, playOnHover: false}}
-                />
-            </div>)
+            openFolders.map((folder) => (
+                <div key={folder.id} className={cls.dockIcon}>
+                    <div className={cls.title}>{folder.title}</div>
+                    <Icon 
+                        className={C(cls.icon, cls.folderIcon)} 
+                        onClick={maximizeWindow.bind(null, folder.id)}
+                        {...dockFolderIcon}
+                    />
+                </div>
+            ))
         }
     </Fragment>
 };
@@ -140,3 +87,53 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DockIcons);
+
+
+function getIcons(onAppClick, onLinkClick) {
+    return [
+        {
+            className: C(cls.icon, cls.browserIcon),
+            src: BrowserIcon,
+            appOpts: browserAppOpts,
+            onClick: onAppClick,
+        },
+        {
+            className: C(cls.icon, cls.calculatorIcon),
+            src: CalculatorIcon,
+            appOpts: calculatorAppOpts,
+            onClick: onAppClick,
+        },
+        {
+            title: 'Email',
+            className: cls.icon,
+            src: EmailIcon,
+            href: `mailto:${EMAIL}`,
+            target: '_self',
+            onClick: onLinkClick,
+        },
+        {
+            title: 'GitHub',
+            className: cls.icon,
+            src: GitHubIcon,
+            href: GIT_HUB,
+            onClick: onLinkClick,
+        },
+        {
+            title: 'LinkedIn',
+            className: cls.icon,
+            src: LinkedInIcon,
+            href: LINKED_IN,
+            onClick: onLinkClick,
+        },
+        {
+            className: C(cls.icon, cls.settingsIcon),
+            animationData: settingsAnimationData,
+            loop: false,
+            autoplay: false,
+            speed: 1,
+            playOnHover: true,
+            appOpts: settingsAppOpts,
+            onClick: onAppClick,
+        },
+    ];
+}
