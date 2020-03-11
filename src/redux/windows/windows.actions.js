@@ -22,9 +22,18 @@ export const toggleWindowZoom = id => ({
     payload: id,
 });
 
-export const updateWindowDimensions = (id, width, height) => ({
+/**
+ * Update the dimensions of a window
+ * @param {string} id 
+ * @param {object} dimensions
+ * @param {number} [dimensions.x]
+ * @param {number} [dimensions.y]
+ * @param {number} [dimensions.width]
+ * @param {number} [dimensions.height] - in pixels 
+ */
+export const updateWindowDimensions = (id, dimensions) => ({
     type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
-    payload: {id, width, height},
+    payload: {id, dimensions},
 });
 
 export const setWindowFocused = id => (dispatch, getState) => {

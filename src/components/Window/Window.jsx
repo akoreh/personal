@@ -14,20 +14,25 @@ import {
     updateWindowDimensions
 } from '../../redux/windows/windows.actions';
 
-import { C, getRandomInt } from '../../util';
+import { C } from '../../util';
 
 import cls from './Window.module.scss';
 
 const Window = ({ 
-    id, 
+    id,
+    elementId,
+    dragHandleId,
+    resizeHandleId,
     title,
     type, 
     width,
     height,
-    children,
+    x,
+    y,
     isMinimized,
     isZoomed, 
     isFocused,
+    children,
     //METHODS
     closeWindow,
     minimizeWindow,
@@ -35,34 +40,6 @@ const Window = ({
     setWindowFocused,
     updateWindowDimensions,
 }) => {
-    const windowId = `window_${id}`;
-    const dragHandleId = `${windowId}--dragHandle`;
-    const resizeHandleId = `${windowId}--resizeHandle`;
-    const widthNum = calculateDimension(width, window.innerWidth);
-    const heightNum = calculateDimension(height, window.innerHeight);
-    const centerX  = (window.innerWidth / 2 - widthNum / 2) + getRandomInt(-50, 150);
-    const centerY = getRandomInt(0, 150);
-
-    /**
-     * Converts dimension values like '50%' or '50vh' to actual pixel value
-     * based on a parent dimension
-     * @param {string} dimension 
-     * @param {number} parentDimension 
-     */
-    function calculateDimension(dimension, parentDimension) {
-        if (typeof dimension === 'number') {
-            return dimension;
-        }
-
-        if (dimension.indexOf('px') !== -1) {
-            return parseInt(dimension.replace('px', ''));
-        }
-
-        dimension = parseInt(dimension.replace('vw', '').replace('vh', ''));
-
-        return (dimension / 100) * parentDimension;
-    }
-    
     function setFocused() {
         if (!isFocused) {
             setWindowFocused(id);
@@ -70,31 +47,33 @@ const Window = ({
     }
 
     function onResize(_, { size }) {
-        updateWindowDimensions(id, size.width, size.height);
+        const {width, height} = size;
+        updateWindowDimensions(id, {width, height});
     };
 
     function onClose(id) {
-       animateWindowClosing(closeWindow.bind(null, id));
+        TweenLite.to(document.getElementById(elementId), .2, {autoAlpha: 0, y: -height * 1.5})
+                 .eventCallback('onComplete', closeWindow.bind(null, id));
+    }
+
+    function onZoomIn(id) {
+        TweenLite.to(document.getElementById(elementId), .2, {height: '100%', width: '100%', x:0, y:0, top: '30px'})
+                 .eventCallback('onComplete', toggleWindowZoom.bind(null, id));
     }
 
     function animateWindowOpening() {
-        const windowElement = document.getElementById(windowId);
+        const windowElement = document.getElementById(elementId);
         const timeline = new TimelineLite();
 
         timeline.set(windowElement, {opacity: 1});
         timeline.from(windowElement, 1, { y: '-100%', ease: "elastic.out(1.5, 1.5)"});
     }
 
-    function animateWindowClosing(callback) {
-        TweenLite.to(document.getElementById(windowId), .2, {autoAlpha: 0, y: -heightNum * 1.5})
-                 .eventCallback('onComplete', callback);
-    }
-
     useEffect(animateWindowOpening, []);
     
-    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x: centerX, y: centerY}} onStart={setFocused}>
+    return <Draggable handle={`#${dragHandleId}`} defaultPosition={{x, y}} onStart={setFocused}>
         <ResizableBox
-            id={windowId}
+            id={elementId}
             className={C(
                 cls.window,
                 isMinimized && cls.minimized,
@@ -104,8 +83,8 @@ const Window = ({
             )}
             style={{width, height}}
             handle={<div id={resizeHandleId} className={cls.resizeHandle}></div>}
-            width={widthNum}
-            height={heightNum}
+            width={width}
+            height={height}
             minConstraints={[450, 300]}
             onClick={setFocused}
             onResize={onResize}
@@ -119,7 +98,7 @@ const Window = ({
                         <WindowButtons 
                             onClose={onClose.bind(null, id)}
                             onMinimize={minimizeWindow.bind(null, id)}
-                            onToggleZoom={toggleWindowZoom.bind(null, id)}
+                            onToggleZoom={onZoomIn.bind(null, id)}
                         />
                     </div>
                 </Fragment>

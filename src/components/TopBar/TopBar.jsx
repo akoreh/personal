@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { TweenLite, Expo } from 'gsap';
-import moment from 'moment';
 
 import TopBarIcons from './TopBarIcons';
 import WindowButtons from '../WindowButtons/WindowButtons';
 
-import { C } from '../../util';
 import { IS_DEV, L_S_TIME, SCROLL_TO_TOP_DURATION } from '../../constants';
 import { selectZoomedWindow } from '../../redux/windows/windows.selectors';
 import { closeWindow, toggleWindowZoom, toggleWindowMinimized } from '../../redux/windows/windows.actions';
+
+import { C } from '../../util';
 
 import cls from './TopBar.module.scss';
 
@@ -39,7 +40,7 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
     }
 
     function onClose() {
-        TweenLite.to(document.getElementById(`window_${zoomedWindow.id}`), .2, {autoAlpha: 0})
+        TweenLite.to(document.getElementById(zoomedWindow.elementId), .2, {autoAlpha: 0})
                  .eventCallback('onComplete', closeWindow.bind(null, zoomedWindow.id));
     }
 
