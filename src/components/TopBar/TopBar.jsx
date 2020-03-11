@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { TweenMax, Expo } from 'gsap';
+import { TweenLite, Expo } from 'gsap';
 import moment from 'moment';
 
 import TopBarIcons from './TopBarIcons';
@@ -24,9 +24,9 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
         const target = topBarRef.current;
         
         if (IS_DEV) {
-            TweenMax.set(target, {y: 0});
+            TweenLite.set(target, {y: 0});
         } else {
-            TweenMax.to(target, 1, {y: 0, ease: Expo.easeOut, delay});
+            TweenLite.to(target, 1, {y: 0, ease: Expo.easeOut, delay});
         }
     };
 
@@ -36,6 +36,11 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
         if (now.getMinutes() !== systemTime.getMinutes()) {
             setSystemTime(now);
         }
+    }
+
+    function onClose() {
+        TweenLite.to(document.getElementById(`window_${zoomedWindow.id}`), .2, {autoAlpha: 0})
+                 .eventCallback('onComplete', closeWindow.bind(null, zoomedWindow.id));
     }
 
     useEffect(() => {
@@ -50,7 +55,7 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
         <div className={cls.left}>
             {zoomedWindow && (
                 <WindowButtons 
-                    onClose={closeWindow.bind(null, zoomedWindow.id)}
+                    onClose={onClose}
                     onMinimize={minimizeWindow.bind(null, zoomedWindow.id)}
                     onToggleZoom={toggleWindowZoom.bind(null, zoomedWindow.id)}
                 />

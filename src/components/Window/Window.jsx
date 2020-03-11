@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import Draggable from 'react-draggable';
 import { connect } from 'react-redux';
 import { ResizableBox } from 'react-resizable';
@@ -74,9 +74,7 @@ const Window = ({
     };
 
     function onClose(id) {
-        animateWindowClosing().then(() => {
-            closeWindow(id);
-        });
+       animateWindowClosing(closeWindow.bind(null, id));
     }
 
     function animateWindowOpening() {
@@ -84,13 +82,12 @@ const Window = ({
         const timeline = new TimelineLite();
 
         timeline.set(windowElement, {opacity: 1});
-        timeline.from(windowElement, 1, {y: '-100%', ease: "elastic.out(1.5, 1.5)"});
+        timeline.from(windowElement, 1, { y: '-100%', ease: "elastic.out(1.5, 1.5)"});
     }
 
-    function animateWindowClosing() {
-        return new Promise(resolve => {
-            TweenLite.to(document.getElementById(windowId), .2, {y: -heightNum * 1.5}).eventCallback('onComplete', resolve);
-        });
+    function animateWindowClosing(callback) {
+        TweenLite.to(document.getElementById(windowId), .2, {autoAlpha: 0, y: -heightNum * 1.5})
+                 .eventCallback('onComplete', callback);
     }
 
     useEffect(animateWindowOpening, []);
@@ -113,17 +110,19 @@ const Window = ({
             onClick={setFocused}
             onResize={onResize}
         >
-            <div id={dragHandleId} className={cls.dragHandle}>
-                {!isZoomed && <p className={cls.title}>{title}</p>}
-            </div>
             {!isZoomed && (
-                <div className={cls.buttons}>
-                    <WindowButtons 
-                        onClose={onClose.bind(null, id)}
-                        onMinimize={minimizeWindow.bind(null, id)}
-                        onToggleZoom={toggleWindowZoom.bind(null, id)}
-                    />
-                </div>
+                <Fragment>
+                    <div id={dragHandleId} className={cls.dragHandle}>
+                        <p className={cls.title}>{title}</p>
+                    </div>
+                    <div className={cls.buttons}>
+                        <WindowButtons 
+                            onClose={onClose.bind(null, id)}
+                            onMinimize={minimizeWindow.bind(null, id)}
+                            onToggleZoom={toggleWindowZoom.bind(null, id)}
+                        />
+                    </div>
+                </Fragment>
             )}
             <div className={cls.content}>
                 {children}
