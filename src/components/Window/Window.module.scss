@@ -23,8 +23,8 @@ $sideBorder: $borderWidth solid $borderColor;
     }
 
     &.zoomed {
-        @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
-        transform: none !important;
+        // @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
+        max-height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px);
         top: $topBarHeight;
         left: 0;
         transform: none;

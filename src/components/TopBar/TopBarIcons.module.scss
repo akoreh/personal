@@ -8,22 +8,23 @@
 }
 
 .speaker {
-    margin-right: .5rem;
+    @include box-size(1.1rem, auto);
+    margin-right: -2rem;
 }
 
 .wifiIndicator {
-    @include box-size(2rem, auto);
-    margin-right: 1rem;
+    @include box-size(1.2rem, 1rem);
+    margin-right: -2rem;
+    margin-bottom: .1rem;;
 }
 
 .bluetoothIndicator {
-    @include box-size(4rem, auto);
-    margin-left: -2rem;
+    @include box-size(3.5rem, auto);
+    margin-right: -1rem;
 }
 
 .batteryIndicator {
-    width: 7.5rem;
+    @include box-size(7.5rem, auto);
     margin-right: -3rem;
-    margin-left: -3.5rem;
-    pointer-events: none;
+    margin-left: -3rem;
 }

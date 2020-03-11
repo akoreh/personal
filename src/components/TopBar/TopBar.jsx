@@ -44,6 +44,13 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
                  .eventCallback('onComplete', closeWindow.bind(null, zoomedWindow.id));
     }
 
+    function onUnzoom() {
+        const {id, elementId, width, height, x, y} = zoomedWindow;
+
+        TweenLite.to(document.getElementById(elementId), .5, {width, height, x, y, top: 'unset', ease: "elastic.out(1, 0.5)"})
+                 .eventCallback('onStart', toggleWindowZoom.bind(null, id));
+    }
+
     useEffect(() => {
         const sysTimeInterval = setInterval(updateSystemTime, 5000);
 
@@ -58,7 +65,7 @@ const TopBar = ({ zoomedWindow, closeWindow, minimizeWindow, toggleWindowZoom}) 
                 <WindowButtons 
                     onClose={onClose}
                     onMinimize={minimizeWindow.bind(null, zoomedWindow.id)}
-                    onToggleZoom={toggleWindowZoom.bind(null, zoomedWindow.id)}
+                    onToggleZoom={onUnzoom}
                 />
             )}
             <h1 className={cls.brand}>

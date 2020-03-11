@@ -82,10 +82,10 @@ const Window = ({
                 type === 'app' && cls.app,
             )}
             style={{width, height}}
-            handle={<div id={resizeHandleId} className={cls.resizeHandle}></div>}
             width={width}
             height={height}
             minConstraints={[450, 300]}
+            handle={() => <div id={resizeHandleId} className={cls.resizeHandle}></div>}
             onClick={setFocused}
             onResize={onResize}
         >
