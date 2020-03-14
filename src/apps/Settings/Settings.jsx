@@ -8,7 +8,7 @@ const Settings = () => {
     </div>;
 };
 
-export const appOpts = {
+export const windowOpts = {
     id: 'settings',
     content: <Settings />,
     type: 'app',

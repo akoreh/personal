@@ -12,9 +12,9 @@ import GitHubIcon from '../../assets/img/icons/github.svg';
 import LinkedInIcon from '../../assets/img/icons/linkedin.svg';
 import settingsAnimationData from '../../assets/anim/settings.json';
 
-import { appOpts as calculatorAppOpts} from '../../apps/Calculator/Calculator';
-import { appOpts as browserAppOpts } from '../../apps/Browser/Browser';
-import { appOpts as settingsAppOpts } from '../../apps/Settings/Settings';
+import { windowOpts as calculatorWindowOpts} from '../../apps/Calculator/Calculator';
+import { windowOpts as browserWindowOpts } from '../../apps/Browser/Browser';
+import { windowOpts as settingsWindowOpts } from '../../apps/Settings/Settings';
 import { folderIcon } from '../../apps/Folder/Folder';
 
 import { openWindowAndSetFocused, toggleWindowMinimized } from '../../redux/windows/windows.actions';
@@ -39,7 +39,7 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
     }
 
     function onAppClick() {
-        appIsRunning(this.appOpts.id) ? maximizeWindow(this.appOpts.id) : openWindowAndSetFocused(this.appOpts);
+        appIsRunning(this.windowOpts.id) ? maximizeWindow(this.windowOpts.id) : openWindowAndSetFocused(this.windowOpts);
     }
 
     function onLinkClick() {
@@ -51,9 +51,9 @@ const DockIcons = ({ openApps, openFolders, openWindowAndSetFocused, maximizeWin
             icons.map((icon, index) => (
                 <div 
                     key={index} 
-                    className={C(cls.dockIcon, appIsRunning(get(icon, ['appOpts', 'id'])) && cls.appRunning)}
+                    className={C(cls.dockIcon, appIsRunning(get(icon, ['windowOpts', 'id'])) && cls.appRunning)}
                 >
-                    <div className={cls.title}>{get(icon, ['appOpts', 'title'], icon.title)}</div>
+                    <div className={cls.title}>{get(icon, ['windowOpts', 'title'], icon.title)}</div>
                     <Icon {...icon} />
                 </div>
             ))
@@ -94,13 +94,13 @@ function getIcons(onAppClick, onLinkClick) {
         {
             className: C(cls.icon, cls.browserIcon),
             src: BrowserIcon,
-            appOpts: browserAppOpts,
+            windowOpts: browserWindowOpts,
             onClick: onAppClick,
         },
         {
             className: C(cls.icon, cls.calculatorIcon),
             src: CalculatorIcon,
-            appOpts: calculatorAppOpts,
+            windowOpts: calculatorWindowOpts,
             onClick: onAppClick,
         },
         {
@@ -132,7 +132,7 @@ function getIcons(onAppClick, onLinkClick) {
             autoplay: false,
             speed: 1,
             playOnHover: true,
-            appOpts: settingsAppOpts,
+            windowOpts: settingsWindowOpts,
             onClick: onAppClick,
         },
     ];

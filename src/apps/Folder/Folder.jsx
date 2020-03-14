@@ -24,7 +24,7 @@ const Folder = ({ icons }) => {
     </div>
 };
 
-export const appOpts = {
+export const windowOpts = {
     content: <Folder />,
     type: 'folder',
 };

@@ -9,14 +9,14 @@ const DEFAULT_OPTS = {
     height: '60%',
 };
 
-export const openWindow = (openWindows, appOpts) => {
-    const windowAlreadyOpen = find(openWindows, openWindow => openWindow.id === appOpts.id);
+export const openWindow = (openWindows, windowOpts) => {
+    const windowAlreadyOpen = find(openWindows, openWindow => openWindow.id === windowOpts.id);
 
     if (windowAlreadyOpen) {
         return openWindows;
     }
 
-    return  [...openWindows, createNewWindow(appOpts)];
+    return  [...openWindows, createNewWindow(windowOpts)];
 };
 
 export const closeWindow = (openWindows, id) => filter(openWindows, openWindow => openWindow.id !== id);
@@ -45,15 +45,15 @@ export const updateWindowDimensions = (openWindows, {id, dimensions}) => {
     return windows;
 }
 
-const createNewWindow = appOpts => {
-    const elementId = `window_${appOpts.id}`;
+const createNewWindow = windowOpts => {
+    const elementId = `window_${windowOpts.id}`;
 
     const window = {
         elementId,
         dragHandleId: `${elementId}__dragHandle`,
         resizeHandleId: `${elementId}__resizeHandle`,
         ...DEFAULT_OPTS,
-        ...appOpts
+        ...windowOpts
     };
 
     return {

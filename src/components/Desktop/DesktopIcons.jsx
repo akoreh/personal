@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Icon from '../Icons/Icon';
 
 import { openWindowAndSetFocused } from '../../redux/windows/windows.actions';
-import { appOpts as folderAppOpts, folderIcon} from '../../apps/Folder/Folder';
+import { windowOpts as folderWindowOpts, folderIcon} from '../../apps/Folder/Folder';
 
 import cls from './DesktopIcons.module.scss';
 
@@ -33,7 +33,7 @@ const DesktopIcons = ({ openWindowAndSetFocused }) => {
     function openFolder() {
         const { id, label: title } = this;
 
-        openWindowAndSetFocused({id, title, ...folderAppOpts});
+        openWindowAndSetFocused({id, title, ...folderWindowOpts});
     }
 
     return <div className={cls.desktopIcons}>
@@ -42,7 +42,7 @@ const DesktopIcons = ({ openWindowAndSetFocused }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    openWindowAndSetFocused: appOpts => dispatch(openWindowAndSetFocused(appOpts)),
+    openWindowAndSetFocused: windowOpts => dispatch(openWindowAndSetFocused(windowOpts)),
 });
 
 export default connect(null, mapDispatchToProps)(DesktopIcons);

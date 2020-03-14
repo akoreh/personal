@@ -73,7 +73,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(AppBrowser);
 
-export const appOpts = {
+export const windowOpts = {
     id: APP_ID,
     content: <ConnectedBrowser />,
     type: 'app',

@@ -23,7 +23,7 @@ const AppCalculator = () => {
     </div>;
 };
 
-export const appOpts = {
+export const windowOpts = {
     id: 'calculator',
     content: <AppCalculator />,
     type: 'app',

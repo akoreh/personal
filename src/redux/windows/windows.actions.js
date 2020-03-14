@@ -2,9 +2,13 @@ import { find } from 'lodash';
 
 import WindowActionTypes from './windows.types';
 
-export const openWindow = appOpts => ({
+/**
+ * Open a new window
+ * @param {import('./windows.types').WindowOptions} windowOpts 
+ */
+export const openWindow = windowOpts => ({
     type: WindowActionTypes.OPEN_WINDOW,
-    payload: appOpts,
+    payload: windowOpts,
 });
 
 export const closeWindow = id => ({
@@ -22,20 +26,6 @@ export const toggleWindowZoom = id => ({
     payload: id,
 });
 
-/**
- * Update the dimensions of a window
- * @param {string} id 
- * @param {object} dimensions
- * @param {number} [dimensions.x]
- * @param {number} [dimensions.y]
- * @param {number} [dimensions.width]
- * @param {number} [dimensions.height] - in pixels 
- */
-export const updateWindowDimensions = (id, dimensions) => ({
-    type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
-    payload: {id, dimensions},
-});
-
 export const setWindowFocused = id => (dispatch, getState) => {
     const state = getState();
     const window = find(state.windows.openWindows, { id: id });
@@ -50,9 +40,23 @@ export const setWindowFocused = id => (dispatch, getState) => {
     });
 }
 
-export const openWindowAndSetFocused = appOpts => {
+export const openWindowAndSetFocused = windowOpts => {
     return dispatch => {
-        dispatch(openWindow(appOpts));
-        dispatch(setWindowFocused(appOpts.id));
+        dispatch(openWindow(windowOpts));
+        dispatch(setWindowFocused(windowOpts.id));
     };
 };
+
+/**
+ * Update the dimensions of a window
+ * @param {string} id 
+ * @param {object} dimensions
+ * @param {number} [dimensions.x]
+ * @param {number} [dimensions.y]
+ * @param {number} [dimensions.width]
+ * @param {number} [dimensions.height] - in pixels 
+ */
+export const updateWindowDimensions = (id, dimensions) => ({
+    type: WindowActionTypes.UPDATE_WINDOW_DIMENSIONS,
+    payload: {id, dimensions},
+});
