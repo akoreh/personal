@@ -1,5 +1,5 @@
 import React from "react";
-import { TimelineLite, TweenLite } from "gsap";
+import { TimelineLite } from "gsap";
 
 import TopBar from "./components/TopBar/TopBar";
 import Desktop from "./components/Desktop/Desktop";
@@ -17,18 +17,12 @@ import {
 import cls from "./App.module.scss";
 
 function App() {
-  const showCursor = () => {
-    TweenLite.set(document.body, {
-      cursor: "",
-      delay: IS_DEV ? 0 : LOADING_SCROLL_DURATION
-    });
-  };
+  const showCursor = () => (document.body.style.cursor = "");
 
   const hideLoadingScreen = () => {
     const loadingScreen = document.querySelector("#loading");
-    const loadingScreenTimeline = new TimelineLite();
 
-    loadingScreenTimeline
+    new TimelineLite()
       .to(
         loadingScreen,
         L_S_FADE_DURATION,
@@ -39,8 +33,8 @@ function App() {
   };
 
   React.useEffect(() => {
-    showCursor();
     hideLoadingScreen();
+    setTimeout(showCursor, IS_DEV ? 0 : LOADING_SCROLL_DURATION * 1000);
   }, []);
 
   return (
