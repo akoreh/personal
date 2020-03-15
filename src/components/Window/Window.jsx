@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React from "react";
 import Draggable from "react-draggable";
 import { connect } from "react-redux";
 import { ResizableBox } from "react-resizable";
@@ -25,7 +25,7 @@ const Window = ({
   setWindowFocused,
   updateWindowDimensions,
   ...props
-}) => { 
+}) => {
   const {
     id,
     elementId,
@@ -37,7 +37,6 @@ const Window = ({
     height,
     x,
     y,
-    isMinimized,
     isZoomed,
     isFocused
   } = props.window;
@@ -58,6 +57,14 @@ const Window = ({
       autoAlpha: 0,
       y: -height * 1.5
     }).eventCallback("onComplete", closeWindow.bind(null, id));
+  }
+
+  function onMinimize(id) {
+    TweenLite.to(document.getElementById(elementId), 0.3, {
+      width: 0,
+      y: height * 2,
+      x: window.innerWidth / 2
+    }).eventCallback("onComplete", minimizeWindow.bind(null, id));
   }
 
   function onZoomIn(id) {
@@ -81,7 +88,7 @@ const Window = ({
     });
   }
 
-  useEffect(animateWindowOpening, []);
+  React.useEffect(animateWindowOpening, []);
 
   return (
     <Draggable
@@ -93,7 +100,6 @@ const Window = ({
         id={elementId}
         className={C(
           cls.window,
-          isMinimized && cls.minimized,
           isZoomed && cls.zoomed,
           isFocused && cls.focused,
           type === "app" && cls.app
@@ -109,18 +115,18 @@ const Window = ({
         onResize={onResize}
       >
         {!isZoomed && (
-          <Fragment>
+          <React.Fragment>
             <div id={dragHandleId} className={cls.dragHandle}>
               <p className={cls.title}>{title}</p>
             </div>
             <div className={cls.buttons}>
               <WindowButtons
                 onClose={onClose.bind(null, id)}
-                onMinimize={minimizeWindow.bind(null, id)}
+                onMinimize={onMinimize.bind(null, id)}
                 onToggleZoom={onZoomIn.bind(null, id)}
               />
             </div>
-          </Fragment>
+          </React.Fragment>
         )}
         <div className={cls.content}>{props.children}</div>
       </ResizableBox>

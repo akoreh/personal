@@ -2,11 +2,12 @@
 @import './scss/mixins';
 
 .app {
-    height: 100vh;
+    @include box-size(100vw, 100vh);
+    overflow: hidden;
 
     .dock {
-        @include flex(center, flex-end);
         @include box-size(100%, $dockHeight);
+        @include flex(center, flex-end);
         position: absolute;
         bottom: 0;
     }

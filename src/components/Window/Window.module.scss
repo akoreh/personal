@@ -18,10 +18,6 @@ $sideBorder: $borderWidth solid $borderColor;
     
     opacity: 0;
 
-    &.minimized {
-        display: none;
-    }
-
     &.zoomed {
         // @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
         max-height: calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px);

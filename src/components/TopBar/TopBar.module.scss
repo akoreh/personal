@@ -2,7 +2,7 @@
 @import '../../scss/mixins';
 
 .topBar {
-    @include box-size(100%, $topBarHeight);
+    @include box-size(100vw, $topBarHeight);
     @include flex;
     @include z-elevation-2;
     position: fixed;
@@ -35,7 +35,7 @@
     }
 
     .right {
-        flex: 2;
+        width: 15%;
 
         .time {
             font-size: .7rem;
