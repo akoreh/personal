@@ -6,28 +6,28 @@ import { openWindowAndSetFocused, setWindowFocused } from '../windows/windows.ac
 import { windowOpts as browserWindowOpts } from '../../apps/Browser/Browser';
 
 export const openTab = tabOptions => (dispatch, getState) => {
-    const state = getState();
-    
-    const browserWindow = find(state.windows.openWindows, { id: browserWindowOpts.id });
+	const state = getState();
 
-    if (!browserWindow) {
-        dispatch(openWindowAndSetFocused(browserWindowOpts));
-    } else if (!browserWindow.isFocused) {
-        dispatch(setWindowFocused(browserWindow.id));
-    }
+	const browserWindow = find(state.windows.openWindows, { id: browserWindowOpts.id });
 
-    dispatch({
-        type: BrowserActionTypes.OPEN_TAB,
-        payload: tabOptions,
-    });
+	if (!browserWindow) {
+		dispatch(openWindowAndSetFocused(browserWindowOpts));
+	} else if (!browserWindow.isFocused) {
+		dispatch(setWindowFocused(browserWindow.id));
+	}
+
+	dispatch({
+		type: BrowserActionTypes.OPEN_TAB,
+		payload: tabOptions
+	});
 };
 
 export const closeTab = id => ({
-    type: BrowserActionTypes.CLOSE_TAB,
-    payload: id
+	type: BrowserActionTypes.CLOSE_TAB,
+	payload: id
 });
 
 export const setTabActive = id => ({
-    type: BrowserActionTypes.SET_TAB_ACTIVE,
-    payload: id
+	type: BrowserActionTypes.SET_TAB_ACTIVE,
+	payload: id
 });

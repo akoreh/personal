@@ -21,7 +21,7 @@ $tabBarHeight: $windowToolbarHeight;
         padding: .5rem;
         background-color: $white;
 
-        & > * {
+        &>* {
             color: $black;
         }
     }

@@ -12,11 +12,11 @@ $sideBorder: $borderWidth solid $borderColor;
     border-left: $sideBorder;
     border-right: $sideBorder;
     border-bottom: $sideBorder;
-    transition: box-shadow .2s cubic-bezier(.75,-0.5,0,1.75);
+    transition: box-shadow .2s cubic-bezier(.75, -0.5, 0, 1.75);
     z-index: $windowZIndex;
     transform: translateY(-200%);
-    
-    opacity: 0;
+
+    display: none;
 
     &.zoomed {
         // @include box-size(100% !important, calc(100% - #{$dockHeight} - #{$topBarHeight} - 5px) !important);
@@ -42,8 +42,8 @@ $sideBorder: $borderWidth solid $borderColor;
         border-right: none;
         background: none;
         border-radius: 20px;
-        
-        .content > * {
+
+        .content>* {
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
         }
@@ -59,7 +59,7 @@ $sideBorder: $borderWidth solid $borderColor;
             left: -$borderWidth;
         }
     }
-    
+
 
     .dragHandle {
         @include box-size(100%, $windowToolbarHeight);
@@ -101,7 +101,7 @@ $sideBorder: $borderWidth solid $borderColor;
         position: relative;
         top: -1px;
 
-        & > * {
+        &>* {
             color: $black;
         }
     }

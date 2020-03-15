@@ -10,7 +10,7 @@ $secondaryFontColor: #03a9f4;
     @include box-size(100%, 100%);
     background-color: #131419;
     padding: 50px 40px 40px 40px;
-    
+
     .display {
         @include inOutNeumorphic;
         @include box-size($buttonSize * 5.5, $buttonSize / 1.5);
@@ -31,7 +31,7 @@ $secondaryFontColor: #03a9f4;
         .buttonRow {
             @include box-size(100%, 15%);
             @include flex(center, center);
-    
+
             .button {
                 @include box-size($buttonSize, 100%);
                 @include flex(center, center);
@@ -42,7 +42,7 @@ $secondaryFontColor: #03a9f4;
                 border: 1px solid $soft-high-light;
                 color: $primaryFontColor;
                 text-align: center;
-                
+
 
                 &:not(:last-child) {
                     margin-right: 25px;

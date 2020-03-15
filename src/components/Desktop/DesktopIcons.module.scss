@@ -7,7 +7,7 @@
     right: 2rem;
     color: $white;
 
-    & > :not(:last-child) {
+    &> :not(:last-child) {
         margin-bottom: 2rem;
     }
 }

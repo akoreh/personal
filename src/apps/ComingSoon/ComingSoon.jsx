@@ -1,16 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import TumbleWeed from "../../assets/img/tumbleweed.png";
+import TumbleWeed from '../../assets/img/tumbleweed.png';
 
-import cls from "./ComingSoon.module.scss";
+import cls from './ComingSoon.module.scss';
 
 const AppComingSoon = () => {
   return (
     <div className={cls.comingSoon}>
-      <div
-        className={cls.bounce}
-        style={{ backgroundImage: `url(${TumbleWeed})` }}
-      />
+      <div className={cls.bounce} style={{ backgroundImage: `url(${TumbleWeed})` }} />
       <div className={cls.pebble} />
       <div className={cls.pebble} />
       <div className={cls.pebble} />
